@@ -1,17 +1,20 @@
 package ua.inf.krre.aprilbrush;
 
+import ua.inf.krre.aprilbrush.logic.BrushEngine;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 
 public class MainActivity extends Activity {
+    private BrushEngine engine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        engine = new BrushEngine();
     }
 
     @Override
@@ -23,9 +26,7 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-        Log.d("AB", "x = " + x + " y = " + y);
+        engine.paintDab(event);
         return true;
     }
 }
