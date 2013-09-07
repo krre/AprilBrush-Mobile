@@ -12,21 +12,25 @@ public class BrushEngine {
     private float prevX;
     private float prevY;
 
-    private int spacing = 50;
-    private int size = 20;
+    private int spacing = 15;
+    private int size = 50;
+    private float angle = 45.0f;
+    private float roundness = 2;
+    private int color = Color.BLUE;
+    private int opacity = 25;
 
     public BrushEngine() {
         paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(color);
         paint.setAntiAlias(true);
-        paint.setAlpha(128);
+        paint.setAlpha(Math.round((float) opacity / 100 * 255));
     }
 
     public void setTouch(Canvas canvas, MotionEvent event) {
         this.canvas = canvas;
         float x = event.getX();
         float y = event.getY();
-        canvas.drawCircle(x, y, size, paint);
+        drawDab(x, y);
         prevX = x;
         prevY = y;
     }
@@ -58,10 +62,18 @@ public class BrushEngine {
             for (int i = 1; i <= numDabs; i++) {
                 betweenX = (float) (prevX + deltaX * i);
                 betweenY = (float) (prevY + deltaY * i);
-                canvas.drawCircle(betweenX, betweenY, size, paint);
+                drawDab(betweenX, betweenY);
             }
             prevX = betweenX;
             prevY = betweenY;
         }
+    }
+
+    private void drawDab(float x, float y) {
+        canvas.save();
+        canvas.rotate(angle, x, y);
+        canvas.scale(1.0f, 1 / roundness, x, y);
+        canvas.drawCircle(x, y, size / 2, paint);
+        canvas.restore();
     }
 }
