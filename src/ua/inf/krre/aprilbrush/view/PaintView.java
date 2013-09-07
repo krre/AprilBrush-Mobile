@@ -31,14 +31,22 @@ public class PaintView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.LTGRAY);
+        canvas.drawColor(Color.WHITE);
         canvas.drawBitmap(bitmap, 0, 0, bitmapPaint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        engine.paintDab(canvas, event);
-        invalidate();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                engine.setTouch(canvas, event);
+                invalidate();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                engine.paintDab(event);
+                invalidate();
+                break;
+        }
         return true;
     }
 
