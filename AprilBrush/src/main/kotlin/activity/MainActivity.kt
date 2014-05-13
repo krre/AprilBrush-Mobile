@@ -1,9 +1,10 @@
-package org.krre.aprilbrush
+package org.krre.aprilbrush.activity
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import org.krre.aprilbrush.R
 
 public class MainActivity() : Activity() {
 
