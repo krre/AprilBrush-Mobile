@@ -15,16 +15,9 @@ public class PaintView(context : Context, attrs : AttributeSet) : View(context, 
 
     override fun onSizeChanged(w : Int, h : Int, oldw : Int, oldh : Int) {
         super.onSizeChanged(w, h, oldw, oldh);
-
-        if (isInEditMode()) {
-            return;
-        }
     }
 
     override fun onDraw(canvas : Canvas ) {
-        if (isInEditMode()) {
-            return;
-        }
         canvas.drawColor(Color.WHITE);
     }
 
@@ -35,7 +28,8 @@ public class PaintView(context : Context, attrs : AttributeSet) : View(context, 
                 invalidate()
             }
             MotionEvent.ACTION_MOVE -> {
-                Log.d(TAG, "move")
+                val pressure =  event.getPressure()
+                Log.d(TAG, pressure.toString())
                 invalidate()
             }
             MotionEvent.ACTION_UP -> {
