@@ -14,7 +14,7 @@ public class MainActivity() : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val activityManager = getApplicationContext()?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
+        val activityManager = getBaseContext()?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
         Log.d(TAG, activityManager?.getMemoryClass().toString())
         Log.d(TAG, activityManager?.getLargeMemoryClass().toString())
     }
