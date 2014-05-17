@@ -9,13 +9,15 @@ import android.content.Context
 
 public class MainActivity() : Activity() {
     private val TAG = "AB"
+    public var memoryClass : Int? = 0
+        get
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val activityManager = getBaseContext()?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
-        Log.d(TAG, activityManager?.getMemoryClass().toString())
-        Log.d(TAG, activityManager?.getLargeMemoryClass().toString())
+        memoryClass = activityManager?.getLargeMemoryClass()
     }
 }
