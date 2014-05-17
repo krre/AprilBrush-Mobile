@@ -3,10 +3,10 @@ package org.krre.aprilbrush.logic
 import android.util.Log
 import android.view.MotionEvent
 
-public class BrushEngine {
+class BrushEngine {
     private val TAG = "AB"
 
-    public fun paintDab(event : MotionEvent) {
+    fun paintDab(event : MotionEvent) {
         for (i in event.getHistorySize().indices) {
             Log.d(TAG, "history: x = ${event.getHistoricalX(i).toString()} y = ${event.getHistoricalY(i).toString()} pressure = ${event.getHistoricalPressure(i).toString()}")
         }

@@ -10,7 +10,7 @@ import android.view.View;
 import android.util.Log
 import org.krre.aprilbrush.logic.BrushEngine
 
-public class PaintView(context : Context, attrs : AttributeSet) : View(context, attrs) {
+class PaintView(context : Context, attrs : AttributeSet) : View(context, attrs) {
     private val bitmapPaint : Paint = Paint(Paint.DITHER_FLAG)
     private val TAG = "AB"
     private val brushEngine = BrushEngine()
