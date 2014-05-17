@@ -8,10 +8,9 @@ import android.app.ActivityManager
 import android.content.Context
 
 public class MainActivity() : Activity() {
-    private val TAG = "AB"
-    public var memoryClass : Int? = 0
-        get
+    var memoryClass : Int? = 0
         private set
+    private val TAG = "AB"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
