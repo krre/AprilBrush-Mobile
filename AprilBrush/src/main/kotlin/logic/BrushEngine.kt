@@ -6,18 +6,17 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.Canvas
+import android.graphics.Color
 
 class BrushEngine {
     private val TAG = "AB"
-    var dab : GradientDrawable? = null
-    private val diameter : Int = 0
+    var dabBitmap : Bitmap? = null
     var bufferBitmap : Bitmap? = null
         private set
     private val paint : Paint = Paint()
     private val canvas : Canvas = Canvas();
     {
         paint.setAntiAlias(true)
-        paint.setAlpha(128)
     }
 
     fun setBufferSize(width : Int, height : Int) {
@@ -44,12 +43,11 @@ class BrushEngine {
 
     private fun paintOneDab(x : Float, y : Float, pressure : Float) {
         canvas.save()
-
-        val diameter : Float = 10.0f
-        canvas.drawCircle(x, y, diameter, paint)
-
+        val alpha : Int = Math.round((pressure * 255f))
+        paint.setAlpha(alpha)
+        canvas.drawBitmap(dabBitmap!!, x, y, paint)
         canvas.restore()
 
-        Log.d(TAG, "x = ${x.toString()} y = ${y.toString()} pressure = ${pressure.toString()}")
+        Log.d(TAG, "x = ${x.toString()} y = ${y.toString()} pressure = ${pressure.toString()} alpha = ${alpha}")
     }
 }

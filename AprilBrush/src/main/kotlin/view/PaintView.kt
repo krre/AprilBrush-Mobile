@@ -9,16 +9,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.util.Log
 import org.krre.aprilbrush.logic.BrushEngine
-import org.krre.aprilbrush.drawable.Dab
 import android.graphics.Bitmap
+import android.view.Surface
+import android.view.SurfaceView
+import org.krre.aprilbrush.bitmap.DabBitmap
 
 class PaintView(context : Context, attrs : AttributeSet) : View(context, attrs) {
     private val TAG = "AB"
     private val bufferPaint : Paint = Paint()
-    private val brushEngine = BrushEngine()
-    private val dabDrawable = Dab();
+    private val brushEngine = BrushEngine();
     {
-        brushEngine.dab = dabDrawable
+        val dabBitmap : DabBitmap = DabBitmap()
+        dabBitmap.setSize(20)
+        brushEngine.dabBitmap = dabBitmap.bitmap
     }
 
     override fun onSizeChanged(w : Int, h : Int, oldw : Int, oldh : Int) {
