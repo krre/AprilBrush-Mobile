@@ -29,21 +29,8 @@ class PaintView(context : Context, attrs : AttributeSet) : View(context, attrs) 
     }
 
     override fun onTouchEvent(event : MotionEvent ) : Boolean {
-        when (event.getAction()) {
-            MotionEvent.ACTION_DOWN -> {
-                Log.d(TAG, "down")
-                brushEngine.paintDab(event)
-                invalidate()
-            }
-            MotionEvent.ACTION_MOVE -> {
-                brushEngine.paintDab(event)
-                invalidate()
-            }
-            MotionEvent.ACTION_UP -> {
-                Log.d(TAG, "up")
-                invalidate()
-            }
-        }
+        brushEngine.paintDab(event)
+        invalidate()
         return true;
     }
 }

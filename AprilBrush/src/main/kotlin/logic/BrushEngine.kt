@@ -18,6 +18,7 @@ class BrushEngine {
     private val dabPaint : Paint = Paint()
     private val bufferCanvas : Canvas = Canvas();
     private val dabCanvas : Canvas = Canvas();
+    private var toolType : Int = 0
 
     var diameter : Int = 20
     {
@@ -34,6 +35,19 @@ class BrushEngine {
     }
 
     fun paintDab(event : MotionEvent) {
+        when (event.getAction()) {
+            MotionEvent.ACTION_DOWN -> {
+                toolType = event.getToolType(0)
+                Log.d(TAG, "down ")
+            }
+            MotionEvent.ACTION_MOVE -> {
+            }
+            MotionEvent.ACTION_UP -> {
+                Log.d(TAG, "up")
+                return
+            }
+        }
+
         var x : Float
         var y : Float
         var pressure : Float
@@ -53,7 +67,8 @@ class BrushEngine {
         }
     }
 
-    private fun paintOneDab(x : Float, y : Float, pressure : Float) {
+    private fun paintOneDab(x : Float, y : Float, p : Float) {
+        val pressure = if (toolType == MotionEvent.TOOL_TYPE_STYLUS) p else 1.0f
         bufferCanvas.save()
         val alpha : Int = Math.round((pressure * 255f))
         bufferPaint.setAlpha(alpha)
