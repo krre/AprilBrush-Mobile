@@ -37,17 +37,20 @@ class BrushEngine {
         var x : Float
         var y : Float
         var pressure : Float
-
-        for (i in event.getHistorySize().indices) {
-            x = event.getHistoricalX(i)
-            y = event.getHistoricalY(i)
-            pressure = event.getHistoricalPressure(i)
+        val historySize = event.getHistorySize()
+        if (historySize > 0) {
+            for (i in event.getHistorySize().indices) {
+                x = event.getHistoricalX(i)
+                y = event.getHistoricalY(i)
+                pressure = event.getHistoricalPressure(i)
+                paintOneDab(x, y, pressure)
+            }
+        } else {
+            x = event.getX()
+            y = event.getY()
+            pressure = event.getPressure()
             paintOneDab(x, y, pressure)
         }
-        x = event.getX()
-        y = event.getY()
-        pressure = event.getPressure()
-        paintOneDab(x, y, pressure)
     }
 
     private fun paintOneDab(x : Float, y : Float, pressure : Float) {
