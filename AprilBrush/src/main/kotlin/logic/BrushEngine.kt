@@ -37,6 +37,12 @@ class BrushEngine(paintView : PaintView) {
         dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint)
     }
 
+    fun setBitmap(value : Bitmap) {
+        bufferBitmap = Bitmap.createBitmap(value)
+        bufferCanvas.setBitmap(bufferBitmap!!);
+        paintView.invalidate()
+    }
+
     fun setBufferSize(width : Int, height : Int) {
         bufferBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         bufferCanvas.setBitmap(bufferBitmap!!);
@@ -107,8 +113,6 @@ class BrushEngine(paintView : PaintView) {
         val paintY = y - diameter / 2f
         bufferCanvas.drawBitmap(dabBitmap!!, paintX, paintY, bufferPaint)
         bufferCanvas.restore()
-
         paintView.invalidate(paintX.toInt() - 1, paintY.toInt() - 1, paintX.toInt() + diameter + 1, paintY.toInt() + diameter + 1)
-//        Log.d(TAG, "x = ${x.toString()} y = ${y.toString()} pressure = ${pressure.toString()} alpha = ${alpha}")
     }
 }

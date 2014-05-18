@@ -12,11 +12,13 @@ import org.krre.aprilbrush.logic.BrushEngine
 class PaintView(context : Context, attrs : AttributeSet) : View(context, attrs) {
     private val TAG = "AB"
     private val bufferPaint : Paint = Paint()
-    private val brushEngine = BrushEngine(this);
+    val brushEngine = BrushEngine(this);
 
     override fun onSizeChanged(w : Int, h : Int, oldw : Int, oldh : Int) {
         super.onSizeChanged(w, h, oldw, oldh);
-        brushEngine.setBufferSize(w, h)
+        if (brushEngine.bufferBitmap == null) {
+            brushEngine.setBufferSize(w, h)
+        }
     }
 
     override fun onDraw(canvas : Canvas ) {

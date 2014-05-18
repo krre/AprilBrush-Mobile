@@ -3,9 +3,10 @@ package org.krre.aprilbrush.activity
 import android.app.Activity
 import android.os.Bundle
 import org.krre.aprilbrush.R
-import android.util.Log
 import android.app.ActivityManager
 import android.content.Context
+import org.krre.aprilbrush.view.PaintView
+import android.graphics.Bitmap
 
 public class MainActivity() : Activity() {
     var memoryClass : Int? = 0
@@ -18,5 +19,17 @@ public class MainActivity() : Activity() {
 
         val activityManager = getBaseContext()?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
         memoryClass = activityManager?.getLargeMemoryClass()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        val paintView: PaintView? = findViewById(R.id.paintView) as PaintView
+        val bufferBitmap = paintView?.brushEngine?.bufferBitmap
+        outState.putParcelable("bufferBitmap", bufferBitmap)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        val bufferBitmap: Bitmap? = savedInstanceState.getParcelable("bufferBitmap")
+        val paintView: PaintView? = findViewById(R.id.paintView) as PaintView
+        paintView?.brushEngine?.setBitmap(bufferBitmap!!)
     }
 }
