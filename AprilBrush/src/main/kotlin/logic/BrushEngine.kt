@@ -7,13 +7,14 @@ import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.Canvas
 import android.graphics.Color
+import org.krre.aprilbrush.view.PaintView
 
-class BrushEngine {
+class BrushEngine(paintView : PaintView) {
     private val TAG = "AB"
-    var dabBitmap : Bitmap? = null
-        private set
+    private var dabBitmap : Bitmap? = null
     var bufferBitmap : Bitmap? = null
         private set
+    private val paintView : PaintView = paintView
     private val bufferPaint : Paint = Paint()
     private val dabPaint : Paint = Paint()
     private val bufferCanvas : Canvas = Canvas();
@@ -72,9 +73,12 @@ class BrushEngine {
         bufferCanvas.save()
         val alpha : Int = Math.round((pressure * 255f))
         bufferPaint.setAlpha(alpha)
-        bufferCanvas.drawBitmap(dabBitmap!!, x, y, bufferPaint)
+        val paintX = x - diameter / 2f
+        val paintY = y - diameter / 2f
+        bufferCanvas.drawBitmap(dabBitmap!!, paintX, paintY, bufferPaint)
         bufferCanvas.restore()
 
-        Log.d(TAG, "x = ${x.toString()} y = ${y.toString()} pressure = ${pressure.toString()} alpha = ${alpha}")
+        paintView.invalidate(paintX.toInt(), paintY.toInt(), paintX.toInt() + diameter, paintY.toInt() + diameter)
+//        Log.d(TAG, "x = ${x.toString()} y = ${y.toString()} pressure = ${pressure.toString()} alpha = ${alpha}")
     }
 }
