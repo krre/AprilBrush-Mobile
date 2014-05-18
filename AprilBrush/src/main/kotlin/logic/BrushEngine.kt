@@ -11,17 +11,26 @@ import android.graphics.Color
 class BrushEngine {
     private val TAG = "AB"
     var dabBitmap : Bitmap? = null
+        private set
     var bufferBitmap : Bitmap? = null
         private set
-    private val paint : Paint = Paint()
-    private val canvas : Canvas = Canvas();
+    private val bufferPaint : Paint = Paint()
+    private val dabPaint : Paint = Paint()
+    private val bufferCanvas : Canvas = Canvas();
+    private val dabCanvas : Canvas = Canvas();
+
+    var diameter : Int = 20
     {
-        paint.setAntiAlias(true)
+        dabPaint.setAntiAlias(true)
+        dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888)
+        dabBitmap?.eraseColor(Color.TRANSPARENT)
+        dabCanvas.setBitmap(dabBitmap!!)
+        dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint)
     }
 
     fun setBufferSize(width : Int, height : Int) {
         bufferBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        canvas.setBitmap(bufferBitmap!!);
+        bufferCanvas.setBitmap(bufferBitmap!!);
     }
 
     fun paintDab(event : MotionEvent) {
@@ -42,11 +51,11 @@ class BrushEngine {
     }
 
     private fun paintOneDab(x : Float, y : Float, pressure : Float) {
-        canvas.save()
+        bufferCanvas.save()
         val alpha : Int = Math.round((pressure * 255f))
-        paint.setAlpha(alpha)
-        canvas.drawBitmap(dabBitmap!!, x, y, paint)
-        canvas.restore()
+        bufferPaint.setAlpha(alpha)
+        bufferCanvas.drawBitmap(dabBitmap!!, x, y, bufferPaint)
+        bufferCanvas.restore()
 
         Log.d(TAG, "x = ${x.toString()} y = ${y.toString()} pressure = ${pressure.toString()} alpha = ${alpha}")
     }

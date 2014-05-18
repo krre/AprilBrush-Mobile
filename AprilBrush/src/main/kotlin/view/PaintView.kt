@@ -12,17 +12,11 @@ import org.krre.aprilbrush.logic.BrushEngine
 import android.graphics.Bitmap
 import android.view.Surface
 import android.view.SurfaceView
-import org.krre.aprilbrush.bitmap.DabBitmap
 
 class PaintView(context : Context, attrs : AttributeSet) : View(context, attrs) {
     private val TAG = "AB"
     private val bufferPaint : Paint = Paint()
     private val brushEngine = BrushEngine();
-    {
-        val dabBitmap : DabBitmap = DabBitmap()
-        dabBitmap.setSize(20)
-        brushEngine.dabBitmap = dabBitmap.bitmap
-    }
 
     override fun onSizeChanged(w : Int, h : Int, oldw : Int, oldh : Int) {
         super.onSizeChanged(w, h, oldw, oldh);
