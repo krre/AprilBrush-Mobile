@@ -8,6 +8,9 @@ import android.graphics.Color
 import org.krre.aprilbrush.view.PaintView
 import android.graphics.Path
 import android.graphics.PathMeasure
+import android.content.res.Configuration
+import android.util.Log
+import android.graphics.Matrix
 
 class BrushEngine(paintView : PaintView) {
     private val TAG = "AB"
@@ -37,8 +40,17 @@ class BrushEngine(paintView : PaintView) {
         dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint)
     }
 
-    fun setBitmap(value : Bitmap) {
-        bufferBitmap = Bitmap.createBitmap(value)
+    fun setBitmap(value : Bitmap, orientation : Int?) {
+        val width  = value.getWidth()
+        val height = value.getHeight()
+        if ((orientation == Configuration.ORIENTATION_LANDSCAPE && width < height) ||
+            (orientation == Configuration.ORIENTATION_PORTRAIT && width > height)) {
+            val matrix = Matrix()
+            matrix.postRotate(90f);
+            bufferBitmap = Bitmap.createBitmap(value, 0, 0, width, height, matrix, true);
+        } else {
+            bufferBitmap = Bitmap.createBitmap(value, 0, 0, width, height)
+        }
         bufferCanvas.setBitmap(bufferBitmap!!);
         paintView.invalidate()
     }

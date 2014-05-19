@@ -7,6 +7,7 @@ import android.app.ActivityManager
 import android.content.Context
 import org.krre.aprilbrush.view.PaintView
 import android.graphics.Bitmap
+import android.util.Log
 
 public class MainActivity() : Activity() {
     var memoryClass : Int? = 0
@@ -30,6 +31,7 @@ public class MainActivity() : Activity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         val bufferBitmap: Bitmap? = savedInstanceState.getParcelable("bufferBitmap")
         val paintView: PaintView? = findViewById(R.id.paintView) as PaintView
-        paintView?.brushEngine?.setBitmap(bufferBitmap!!)
+        val orientation = getResources()?.getConfiguration()?.orientation
+        paintView?.brushEngine?.setBitmap(bufferBitmap!!, orientation)
     }
 }
