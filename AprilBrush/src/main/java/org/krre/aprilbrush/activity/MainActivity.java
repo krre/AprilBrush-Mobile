@@ -10,16 +10,20 @@ import android.view.View;
 import android.widget.Button;
 
 import org.krre.aprilbrush.R;
+import org.krre.aprilbrush.logic.BrushEngine;
 import org.krre.aprilbrush.view.PaintView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private int memoryClass;
     private String TAG = "AB";
+    private BrushEngine brushEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        PaintView paintView = (PaintView)findViewById(R.id.paintView);
+        brushEngine = paintView.getBrushEngine();
         setupButtons();
 
         ActivityManager activityManager = (ActivityManager)getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
@@ -28,8 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        PaintView paintView = (PaintView)findViewById(R.id.paintView);
-        Bitmap bufferBitmap = paintView.getBrushEngine().getBufferBitmap();
+        Bitmap bufferBitmap = brushEngine.getBufferBitmap();
         outState.putParcelable("bufferBitmap", bufferBitmap);
     }
 
@@ -37,9 +40,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         Bitmap bufferBitmap = savedInstanceState.getParcelable("bufferBitmap");
         if (bufferBitmap != null) {
-            PaintView paintView = (PaintView) findViewById(R.id.paintView);
             int orientation = getResources().getConfiguration().orientation;
-            paintView.getBrushEngine().setBitmap(bufferBitmap, orientation);
+            brushEngine.setBitmap(bufferBitmap, orientation);
         }
     }
 
@@ -53,7 +55,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Log.d(TAG, "brush");
                 break;
             case R.id.clearButton:
-                Log.d(TAG, "clear");
+                brushEngine.clear();
                 break;
         }
     }

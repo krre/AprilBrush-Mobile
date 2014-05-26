@@ -66,6 +66,11 @@ public class BrushEngine {
         bufferCanvas.setBitmap(bufferBitmap);
     }
 
+    public void clear() {
+        bufferBitmap.eraseColor(Color.TRANSPARENT);
+        paintView.invalidate();
+    }
+
     public void paintDab(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
