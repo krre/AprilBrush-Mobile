@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">AprilBrush</string>
+    <string name="color">Color</string>
+    <string name="brush">Brush</string>
+    <string name="clear">Clear</string>
 
 </resources>
