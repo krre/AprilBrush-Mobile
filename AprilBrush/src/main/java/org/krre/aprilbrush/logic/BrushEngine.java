@@ -35,6 +35,7 @@ public class BrushEngine {
     public BrushEngine(PaintView paintView) {
         this.paintView = paintView;
         dabPaint.setAntiAlias(true);
+        dabPaint.setColor(Color.BLUE);
         dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
         dabBitmap.eraseColor(Color.TRANSPARENT);
         dabCanvas.setBitmap(dabBitmap);

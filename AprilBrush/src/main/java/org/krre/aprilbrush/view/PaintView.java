@@ -15,11 +15,9 @@ public class PaintView extends View {
     private String TAG = "AB";
     private Paint bufferPaint = new Paint();
     private BrushEngine brushEngine = new BrushEngine(this);
-
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
     public BrushEngine getBrushEngine() {
         return brushEngine;
     }
