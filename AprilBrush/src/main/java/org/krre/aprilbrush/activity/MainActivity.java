@@ -13,7 +13,7 @@ import org.krre.aprilbrush.R;
 import org.krre.aprilbrush.logic.BrushEngine;
 import org.krre.aprilbrush.view.PaintView;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
     private int memoryClass;
     private String TAG = "AB";
     private BrushEngine brushEngine;
@@ -24,7 +24,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.main_activity);
         PaintView paintView = (PaintView)findViewById(R.id.paintView);
         brushEngine = paintView.getBrushEngine();
-        setupButtons();
 
         ActivityManager activityManager = (ActivityManager)getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
         memoryClass = activityManager.getLargeMemoryClass();
@@ -45,29 +44,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.colorButton:
-                Log.d(TAG, "color");
-                break;
-            case R.id.brushButton:
-                Log.d(TAG, "brush");
-                break;
-            case R.id.clearButton:
-                brushEngine.clear();
-                break;
-        }
+    public void onColorButtonClick(View v) {
+        Log.d(TAG, "color");
     }
 
-    private void setupButtons() {
-        Button colorButton = (Button)findViewById(R.id.colorButton);
-        colorButton.setOnClickListener(this);
+    public void onBrushButtonClick(View v) {
+        Log.d(TAG, "brush");
+    }
 
-        Button brushButton = (Button)findViewById(R.id.brushButton);
-        brushButton.setOnClickListener(this);
-
-        Button clearButton = (Button)findViewById(R.id.clearButton);
-        clearButton.setOnClickListener(this);
+    public void onClearButtonClick(View v) {
+        brushEngine.clear();
     }
 }

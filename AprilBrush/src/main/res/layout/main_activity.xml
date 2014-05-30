@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:text="@string/color"
             android:id="@+id/colorButton"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:onClick="onColorButtonClick" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -29,7 +30,8 @@
             android:layout_height="wrap_content"
             android:text="@string/brush"
             android:id="@+id/brushButton"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:onClick="onBrushButtonClick" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -37,7 +39,8 @@
             android:layout_height="wrap_content"
             android:text="@string/clear"
             android:id="@+id/clearButton"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:onClick="onClearButtonClick" />
 
     </LinearLayout>
 
