@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -21,8 +21,9 @@
             android:layout_height="wrap_content"
             android:text="@string/color"
             android:id="@+id/colorButton"
-            android:layout_marginLeft="10dp"
-            android:onClick="onColorButtonClick" />
+            android:onClick="onColorButtonClick"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/brushButton" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -30,8 +31,10 @@
             android:layout_height="wrap_content"
             android:text="@string/brush"
             android:id="@+id/brushButton"
-            android:layout_marginLeft="10dp"
-            android:onClick="onBrushButtonClick" />
+            android:onClick="onBrushButtonClick"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/clearButton"
+            android:layout_marginLeft="10dp" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -39,9 +42,13 @@
             android:layout_height="wrap_content"
             android:text="@string/clear"
             android:id="@+id/clearButton"
+            android:onClick="onClearButtonClick"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="false"
             android:layout_marginLeft="10dp"
-            android:onClick="onClearButtonClick" />
+            android:layout_marginRight="10dp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
