@@ -37,12 +37,9 @@ public class BrushEngine {
     public BrushEngine(PaintView paintView) {
         BrushEngine.brushEngine = this;
         this.paintView = paintView;
-        dabPaint.setAntiAlias(true);
-        dabPaint.setColor(color);
         dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
-        dabBitmap.eraseColor(Color.TRANSPARENT);
         dabCanvas.setBitmap(dabBitmap);
-        dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint);
+        setDabColor(color);
     }
 
     public static BrushEngine getInstance() {
@@ -55,7 +52,13 @@ public class BrushEngine {
 
     public void setColor(int color) {
         this.color = color;
+        setDabColor(color);
+    }
+
+    private void setDabColor(int color) {
+        dabPaint.setAntiAlias(true);
         dabPaint.setColor(color);
+        dabBitmap.eraseColor(Color.TRANSPARENT);
         dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint);
     }
 

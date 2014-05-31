@@ -11,12 +11,9 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 
-import org.krre.aprilbrush.R;
 import org.krre.aprilbrush.logic.BrushEngine;
 
 public class ColorPickerView extends View {
@@ -27,7 +24,6 @@ public class ColorPickerView extends View {
     private final static int VALUE = 2;
     private boolean hueGrab = false;
     private boolean satValGrab = false;
-    private ImageView colorNewImageView;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint satPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Bitmap ringBitmap;
@@ -53,14 +49,12 @@ public class ColorPickerView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         float containerWidth = Math.min(w, h);
         if (containerWidth > 0) {
-            int color = BrushEngine.getInstance().getColor();
-            Color.colorToHSV(color, hsv);
+            if (!isInEditMode()) {
+                int color = BrushEngine.getInstance().getColor();
+                Color.colorToHSV(color, hsv);
+            }
             xyOrigin = containerWidth / 2;
             drawColorPicker(containerWidth);
-
-            View colorPickerLayout = (View) getParent();
-            colorNewImageView = (ImageView) colorPickerLayout.findViewById(R.id.colorNewImageView);
-            colorNewImageView.setBackgroundColor(color);
         }
     }
 
@@ -211,7 +205,6 @@ public class ColorPickerView extends View {
         }
         hsv[HUE] = 360 - hue;
         drawSatRectangle(rectSize);
-        colorNewImageView.setBackgroundColor(Color.HSVToColor(hsv));
         BrushEngine.getInstance().setColor(Color.HSVToColor(hsv));
     }
 
@@ -222,7 +215,6 @@ public class ColorPickerView extends View {
         float value = (y + rectSize / 2) / rectSize;
         hsv[VALUE] = Math.max(0, Math.min(value, 1));
 
-        colorNewImageView.setBackgroundColor(Color.HSVToColor(hsv));
         BrushEngine.getInstance().setColor(Color.HSVToColor(hsv));
 
     }
