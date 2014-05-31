@@ -13,7 +13,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/top_bar">
+        android:background="@drawable/background"
+        android:id="@+id/relativeLayout">
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -50,5 +51,14 @@
             android:layout_marginRight="10dp" />
 
     </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/relativeLayout"
+        android:id="@+id/rightFrame"
+        android:layout_alignParentBottom="false"></FrameLayout>
 
 </RelativeLayout>

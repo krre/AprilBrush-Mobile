@@ -32,10 +32,20 @@ public class BrushEngine {
     private int diameter = 20;
     private int spacing = 100;
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    private int color = Color.BLUE;
+
     public BrushEngine(PaintView paintView) {
         this.paintView = paintView;
         dabPaint.setAntiAlias(true);
-        dabPaint.setColor(Color.BLUE);
+        dabPaint.setColor(color);
         dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
         dabBitmap.eraseColor(Color.TRANSPARENT);
         dabCanvas.setBitmap(dabBitmap);

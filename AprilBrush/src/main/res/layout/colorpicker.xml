@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_all_margin"
+    android:background="@drawable/background">
+
+    <View
+        android:id="@+id/fakeView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/colorPrevImageView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/fakeView"
+        android:background="#ff0200" />
+
+    <ImageView
+        android:id="@+id/colorNewImageView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/colorPrevImageView"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/colorPrevImageView"
+        android:background="#59ff33" />
+
+    <view
+        android:id="@+id/colorPickerView"
+        class="org.krre.aprilbrush.view.ColorPickerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/colorNewImageView"
+        android:layout_marginTop="20dp" />
+
+</RelativeLayout>
