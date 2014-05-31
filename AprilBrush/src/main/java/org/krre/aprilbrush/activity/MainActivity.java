@@ -31,8 +31,6 @@ public class MainActivity extends Activity {
         brushEngine = paintView.getBrushEngine();
 
         colorpickerFragment = new ColorpickerFragment();
-        ColorPickerView colorPickerView = (ColorPickerView)colorpickerFragment.getView();
-//        colorPickerView.setBrushEngine(brushEngine);
 
         ActivityManager activityManager = (ActivityManager)getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
         memoryClass = activityManager.getLargeMemoryClass();

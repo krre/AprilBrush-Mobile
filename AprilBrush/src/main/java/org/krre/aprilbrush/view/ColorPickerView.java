@@ -34,12 +34,6 @@ public class ColorPickerView extends View {
     private Bitmap satBitmap;
     private Bitmap valBitmap;
     private Canvas satCanvas;
-
-    public void setBrushEngine(BrushEngine brushEngine) {
-        this.brushEngine = brushEngine;
-    }
-
-    private BrushEngine brushEngine;
     private float outerRingRadius;
     private float innerRingRadius;
     private float rectSize;
@@ -55,23 +49,18 @@ public class ColorPickerView extends View {
         paint.setStrokeWidth(strokeWidth);
     }
 
-    public float[] getHsv() {
-        return hsv;
-    }
-
-    public void setHsv(float[] hsv) {
-        System.arraycopy(hsv, 0, this.hsv, 0, hsv.length);
-    }
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         float containerWidth = Math.min(w, h);
         if (containerWidth > 0) {
+            int color = BrushEngine.getInstance().getColor();
+            Color.colorToHSV(color, hsv);
             xyOrigin = containerWidth / 2;
             drawColorPicker(containerWidth);
 
             View colorPickerLayout = (View) getParent();
             colorNewImageView = (ImageView) colorPickerLayout.findViewById(R.id.colorNewImageView);
+            colorNewImageView.setBackgroundColor(color);
         }
     }
 
@@ -223,6 +212,7 @@ public class ColorPickerView extends View {
         hsv[HUE] = 360 - hue;
         drawSatRectangle(rectSize);
         colorNewImageView.setBackgroundColor(Color.HSVToColor(hsv));
+        BrushEngine.getInstance().setColor(Color.HSVToColor(hsv));
     }
 
     private void changeSatVal(float x, float y) {
@@ -233,6 +223,7 @@ public class ColorPickerView extends View {
         hsv[VALUE] = Math.max(0, Math.min(value, 1));
 
         colorNewImageView.setBackgroundColor(Color.HSVToColor(hsv));
+        BrushEngine.getInstance().setColor(Color.HSVToColor(hsv));
 
     }
 

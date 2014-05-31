@@ -13,6 +13,7 @@ import android.util.Log;
 import android.graphics.Matrix;
 
 public class BrushEngine {
+    private static BrushEngine brushEngine;
     private String TAG = "AB";
     private Bitmap dabBitmap;
     private Bitmap bufferBitmap;
@@ -31,6 +32,22 @@ public class BrushEngine {
 
     private int diameter = 20;
     private int spacing = 100;
+    private int color = Color.BLUE;
+
+    public BrushEngine(PaintView paintView) {
+        BrushEngine.brushEngine = this;
+        this.paintView = paintView;
+        dabPaint.setAntiAlias(true);
+        dabPaint.setColor(color);
+        dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
+        dabBitmap.eraseColor(Color.TRANSPARENT);
+        dabCanvas.setBitmap(dabBitmap);
+        dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint);
+    }
+
+    public static BrushEngine getInstance() {
+        return BrushEngine.brushEngine;
+    }
 
     public int getColor() {
         return color;
@@ -38,17 +55,7 @@ public class BrushEngine {
 
     public void setColor(int color) {
         this.color = color;
-    }
-
-    private int color = Color.BLUE;
-
-    public BrushEngine(PaintView paintView) {
-        this.paintView = paintView;
-        dabPaint.setAntiAlias(true);
         dabPaint.setColor(color);
-        dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
-        dabBitmap.eraseColor(Color.TRANSPARENT);
-        dabCanvas.setBitmap(dabBitmap);
         dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint);
     }
 
