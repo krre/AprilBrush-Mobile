@@ -9,10 +9,11 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ToggleButton;
 
 import org.krre.aprilbrush.R;
+import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.logic.BrushEngine;
-import org.krre.aprilbrush.view.ColorPickerView;
 import org.krre.aprilbrush.view.PaintView;
 
 public class MainActivity extends Activity {
@@ -49,6 +50,11 @@ public class MainActivity extends Activity {
             int orientation = getResources().getConfiguration().orientation;
             brushEngine.setBitmap(bufferBitmap, orientation);
         }
+    }
+
+    public void onPenToggleClick(View v) {
+        ToggleButton tb = (ToggleButton)v;
+        GlobalVar.getInstance().setPenMode(tb.isChecked());
     }
 
     public void onColorButtonClick(View v) {

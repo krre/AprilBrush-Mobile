@@ -7,7 +7,8 @@
     <org.krre.aprilbrush.view.PaintView
         android:id="@+id/paintView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:clickable="true" />
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -35,7 +36,7 @@
             android:onClick="onBrushButtonClick"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/clearButton"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="@dimen/control_margin" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -47,8 +48,18 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="false"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginLeft="@dimen/control_margin"
+            android:layout_marginRight="@dimen/control_margin" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/penToggleButton"
+            android:textOn="@string/pen"
+            android:textOff="@string/finger"
+            android:layout_marginLeft="@dimen/control_margin"
+            android:onClick="onPenToggleClick" />
 
     </RelativeLayout>
 

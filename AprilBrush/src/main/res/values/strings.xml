@@ -5,5 +5,7 @@
     <string name="color">Color</string>
     <string name="brush">Brush</string>
     <string name="clear">Clear</string>
+    <string name="pen">Pen</string>
+    <string name="finger">Finger</string>
 
 </resources>

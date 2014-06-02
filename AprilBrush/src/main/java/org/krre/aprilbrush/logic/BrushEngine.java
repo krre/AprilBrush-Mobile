@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Canvas;
 import android.graphics.Color;
+
+import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.view.PaintView;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -92,12 +94,16 @@ public class BrushEngine {
     }
 
     public void paintDab(MotionEvent event) {
+        toolType = event.getToolType(0);
+        if (toolType == MotionEvent.TOOL_TYPE_FINGER && GlobalVar.getInstance().isPenMode()) {
+            return;
+        }
+
         float x = event.getX();
         float y = event.getY();
         float pressure  = event.getPressure();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                toolType = event.getToolType(0);
                 paintOneDab(x, y, pressure);
 
                 path.reset();
