@@ -7,6 +7,8 @@ public class GlobalVar {
     private static GlobalVar globalVar = new GlobalVar();
     private boolean penMode = false;
 
+    private boolean isEmulator = false;
+
     private GlobalVar() {
     }
 
@@ -21,5 +23,14 @@ public class GlobalVar {
     public void setPenMode(boolean penMode) {
         this.penMode = penMode;
         Log.d(TAG, "Pen = " + penMode);
+    }
+
+    public boolean isEmulator() {
+        return isEmulator;
+    }
+
+    public void setEmulator(boolean isEmulator) {
+        this.isEmulator = isEmulator;
+        setPenMode(!isEmulator);
     }
 }
