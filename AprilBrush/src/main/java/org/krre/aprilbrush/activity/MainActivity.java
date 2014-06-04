@@ -32,10 +32,11 @@ public class MainActivity extends Activity {
         PaintView paintView = (PaintView)findViewById(R.id.paintView);
         brushEngine = paintView.getBrushEngine();
 
+        ToggleButton penToggleButton = (ToggleButton)findViewById(R.id.penToggleButton);
+        penToggleButton.setChecked(GlobalVar.getInstance().isPenMode());
+
         ActivityManager activityManager = (ActivityManager)getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
         memoryClass = activityManager.getLargeMemoryClass();
-
-        GlobalVar.getInstance().setEmulator(Build.BRAND.equals("generic"));
     }
 
     @Override

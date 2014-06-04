@@ -1,15 +1,16 @@
 package org.krre.aprilbrush.data;
 
-import android.util.Log;
+import android.os.Build;
 
 public class GlobalVar {
     private final String TAG = "AB";
     private static GlobalVar globalVar = new GlobalVar();
     private boolean penMode = false;
 
-    private boolean isEmulator = false;
+    private final boolean isEmulator = Build.BRAND.equals("generic");
 
     private GlobalVar() {
+        setPenMode(!isEmulator);
     }
 
     public static GlobalVar getInstance() {
@@ -26,10 +27,5 @@ public class GlobalVar {
 
     public boolean isEmulator() {
         return isEmulator;
-    }
-
-    public void setEmulator(boolean isEmulator) {
-        this.isEmulator = isEmulator;
-        setPenMode(!isEmulator);
     }
 }
