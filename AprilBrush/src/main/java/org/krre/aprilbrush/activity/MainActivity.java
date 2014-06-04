@@ -8,7 +8,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ToggleButton;
 
@@ -21,7 +20,8 @@ public class MainActivity extends Activity {
     private int memoryClass;
     private String TAG = "AB";
     private BrushEngine brushEngine;
-    private ColorpickerFragment colorpickerFragment;
+    private ColorpickerFragment colorpickerFragment = new ColorpickerFragment();
+    private BrushSettingsFragment brushSettingsFragment = new BrushSettingsFragment();
     private FragmentTransaction fragmentTransaction;
 
     @Override
@@ -31,8 +31,6 @@ public class MainActivity extends Activity {
 
         PaintView paintView = (PaintView)findViewById(R.id.paintView);
         brushEngine = paintView.getBrushEngine();
-
-        colorpickerFragment = new ColorpickerFragment();
 
         ActivityManager activityManager = (ActivityManager)getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
         memoryClass = activityManager.getLargeMemoryClass();
@@ -66,6 +64,7 @@ public class MainActivity extends Activity {
         if (currentFragment != null) {
             fragmentTransaction.remove(colorpickerFragment);
         } else {
+            fragmentTransaction.remove(brushSettingsFragment);
             fragmentTransaction.replace(R.id.colorpickerFrame, colorpickerFragment, "colorpicker");
         }
 
@@ -73,7 +72,16 @@ public class MainActivity extends Activity {
     }
 
     public void onBrushButtonClick(View v) {
-        Log.d(TAG, "brush");
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        Fragment currentFragment = getFragmentManager().findFragmentByTag("brush-settings");
+        if (currentFragment != null) {
+            fragmentTransaction.remove(brushSettingsFragment);
+        } else {
+            fragmentTransaction.remove(colorpickerFragment);
+            fragmentTransaction.replace(R.id.brushSettingsFrame, brushSettingsFragment, "brush-settings");
+        }
+
+        fragmentTransaction.commit();
     }
 
     public void onClearButtonClick(View v) {

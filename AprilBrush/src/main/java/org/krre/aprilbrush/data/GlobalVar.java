@@ -22,7 +22,6 @@ public class GlobalVar {
 
     public void setPenMode(boolean penMode) {
         this.penMode = penMode;
-        Log.d(TAG, "Pen = " + penMode);
     }
 
     public boolean isEmulator() {
