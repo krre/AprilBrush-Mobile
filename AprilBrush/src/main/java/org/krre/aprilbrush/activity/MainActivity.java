@@ -17,7 +17,6 @@ import org.krre.aprilbrush.logic.BrushEngine;
 import org.krre.aprilbrush.view.PaintView;
 
 public class MainActivity extends Activity {
-    private int memoryClass;
     private String TAG = "AB";
     private BrushEngine brushEngine;
     private ColorpickerFragment colorpickerFragment = new ColorpickerFragment();
@@ -36,7 +35,7 @@ public class MainActivity extends Activity {
         penToggleButton.setChecked(GlobalVar.getInstance().isPenMode());
 
         ActivityManager activityManager = (ActivityManager)getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
-        memoryClass = activityManager.getLargeMemoryClass();
+        GlobalVar.getInstance().setMemoryClass(activityManager.getLargeMemoryClass());
     }
 
     @Override

@@ -6,6 +6,7 @@ public class GlobalVar {
     private final String TAG = "AB";
     private static GlobalVar globalVar = new GlobalVar();
     private boolean penMode = false;
+    private int memoryClass;
 
     private final boolean isEmulator = Build.BRAND.equals("generic");
 
@@ -27,5 +28,9 @@ public class GlobalVar {
 
     public boolean isEmulator() {
         return isEmulator;
+    }
+
+    public void setMemoryClass(int memoryClass) {
+        this.memoryClass = memoryClass;
     }
 }
