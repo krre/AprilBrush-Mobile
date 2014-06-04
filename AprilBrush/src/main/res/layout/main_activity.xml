@@ -65,11 +65,11 @@
 
     <FrameLayout
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="false"
         android:layout_below="@+id/relativeLayout"
-        android:id="@+id/rightFrame"
+        android:id="@+id/colorpickerFrame"
         android:layout_alignParentBottom="false"></FrameLayout>
 
 </RelativeLayout>

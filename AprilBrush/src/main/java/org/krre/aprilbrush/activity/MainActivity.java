@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
         if (currentFragment != null) {
             fragmentTransaction.remove(colorpickerFragment);
         } else {
-            fragmentTransaction.replace(R.id.rightFrame, colorpickerFragment, "colorpicker");
+            fragmentTransaction.replace(R.id.colorpickerFrame, colorpickerFragment, "colorpicker");
         }
 
         fragmentTransaction.commit();
