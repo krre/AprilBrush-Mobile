@@ -1,6 +1,7 @@
 package org.krre.aprilbrush.activity;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,21 +21,21 @@ public class BrushSettingsFragment extends Fragment {
         ViewGroup scrollView = (ViewGroup)inflater.inflate(R.layout.brush_settings, null);
         LinearLayout layout = (LinearLayout)scrollView.getChildAt(0);
 
-//        for (int i = 0; i < brushEngine.getBrushList().length; i++) {
-        for (int i = 0; i < 15; i++) {
-            SliderView sliderView = new SliderView(getActivity().getBaseContext());
-//            BrushData.Brush brush = brushData.getList().get(i);
+        MainActivity mainActivity = (MainActivity)getActivity();
+        Resources res = getResources();
+        String[] brushNames = res.getStringArray(R.array.brush_names);
+        int[] brushMins = res.getIntArray(R.array.brush_mins);
+        int[] brushMaxes = res.getIntArray(R.array.brush_maxes);
+        int[] brushValues = res.getIntArray(R.array.brush_values);
 
-//            sliderView.setName(brush.getName());
-            sliderView.setName("name");
-//            sliderView.setMin(brush.getMinValue());
-            sliderView.setMin(0);
-//            sliderView.setMax(brush.getMaxValue());
-            sliderView.setMax(100);
-//            sliderView.setValue(brushEngine.getValue(i));
-            sliderView.setValue(20);
+        for (int i = 0; i < brushNames.length; i++) {
+            SliderView sliderView = new SliderView(getActivity().getBaseContext());
+            sliderView.setName(brushNames[i]);
+            sliderView.setMin(brushMins[i]);
+            sliderView.setMax(brushMaxes[i]);
+            sliderView.setValue(brushValues[i]);
             sliderView.setId(i);
-//            sliderView.addObserver(brushEngine);
+            sliderView.addObserver(mainActivity.getBrushEngine());
 
             layout.addView(sliderView);
         }

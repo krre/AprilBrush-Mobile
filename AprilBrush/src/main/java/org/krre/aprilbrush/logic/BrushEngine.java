@@ -8,13 +8,18 @@ import android.graphics.Color;
 
 import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.view.PaintView;
+import org.krre.aprilbrush.view.SliderView;
+
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.graphics.Matrix;
 
-public class BrushEngine {
+import java.util.Observable;
+import java.util.Observer;
+
+public class BrushEngine implements Observer {
     private static BrushEngine brushEngine;
     private String TAG = "AB";
     private Bitmap dabBitmap;
@@ -163,5 +168,26 @@ public class BrushEngine {
         bufferCanvas.drawBitmap(dabBitmap, paintX, paintY, bufferPaint);
         bufferCanvas.restore();
         paintView.invalidate((int)paintX - 1, (int)paintY - 1, (int)paintX + diameter + 1, (int)paintY + diameter + 1);
+    }
+
+    public void update(Observable obj, Object arg) {
+        SliderView sliderView = (SliderView) arg;
+        int index = sliderView.getId();
+        int value = sliderView.getValue();
+        Log.d(TAG, "value: " + value);
+
+        /*
+        brushList[index] = value;
+
+        BrushData.Property property = property(index);
+        if (property == BrushData.Property.HUE ||
+                property == BrushData.Property.SATURATION ||
+                property == BrushData.Property.VALUE ||
+                property == BrushData.Property.FLOW ||
+                property == BrushData.Property.OPACITY ||
+                property == BrushData.Property.HARDNESS) {
+            setupColor();
+        }
+        */
     }
 }

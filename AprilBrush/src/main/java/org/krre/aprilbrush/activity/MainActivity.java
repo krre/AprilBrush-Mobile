@@ -23,6 +23,10 @@ public class MainActivity extends Activity {
     private BrushSettingsFragment brushSettingsFragment = new BrushSettingsFragment();
     private FragmentTransaction fragmentTransaction;
 
+    public BrushEngine getBrushEngine() {
+        return brushEngine;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
