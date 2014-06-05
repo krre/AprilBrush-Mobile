@@ -1,5 +1,6 @@
 package org.krre.aprilbrush.logic;
 
+import android.util.Log;
 import android.view.MotionEvent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
@@ -13,13 +14,17 @@ import org.krre.aprilbrush.view.SliderView;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.content.res.Configuration;
-import android.util.Log;
 import android.graphics.Matrix;
 
 import java.util.Observable;
 import java.util.Observer;
 
 public class BrushEngine implements Observer {
+    public static final int SIZE = 0;
+    public static final int OPACITY = 1;
+    public static final int SPACING = 2;
+
+
     private static BrushEngine brushEngine;
     private String TAG = "AB";
     private Bitmap dabBitmap;
@@ -37,14 +42,14 @@ public class BrushEngine implements Observer {
     private float prevY;
     private float prevPressure;
 
-    private int diameter = 20;
+    private int size = 20;
     private int spacing = 100;
     private int color = Color.BLUE;
 
     public BrushEngine(PaintView paintView) {
         BrushEngine.brushEngine = this;
         this.paintView = paintView;
-        dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
+        dabBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
         dabCanvas.setBitmap(dabBitmap);
         setDabColor(color);
     }
@@ -66,7 +71,7 @@ public class BrushEngine implements Observer {
         dabPaint.setAntiAlias(true);
         dabPaint.setColor(color);
         dabBitmap.eraseColor(Color.TRANSPARENT);
-        dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint);
+        dabCanvas.drawCircle(size / 2f, size / 2f, size / 2f, dabPaint);
     }
 
     public Bitmap getBufferBitmap() {
@@ -137,7 +142,7 @@ public class BrushEngine implements Observer {
     private void interpolateDab(float x, float y, float p) {
         double pointSpace = Math.sqrt(Math.pow(prevX - x, 2) + Math.pow(prevY - y, 2));
 
-        float deltaDab = diameter * spacing / 100f;
+        float deltaDab = size * spacing / 100f;
         if (pointSpace >= deltaDab) {
             path.quadTo(prevX, prevY, (x + prevX) / 2, (y + prevY) / 2);
         } else {
@@ -163,31 +168,31 @@ public class BrushEngine implements Observer {
         bufferCanvas.save();
         int alpha = Math.round((pressure * 255f));
         bufferPaint.setAlpha(alpha);
-        float paintX = x - diameter / 2f;
-        float paintY = y - diameter / 2f;
+        float paintX = x - size / 2f;
+        float paintY = y - size / 2f;
         bufferCanvas.drawBitmap(dabBitmap, paintX, paintY, bufferPaint);
         bufferCanvas.restore();
-        paintView.invalidate((int)paintX - 1, (int)paintY - 1, (int)paintX + diameter + 1, (int)paintY + diameter + 1);
+        paintView.invalidate((int)paintX - 1, (int)paintY - 1, (int)paintX + size + 1, (int)paintY + size + 1);
     }
 
     public void update(Observable obj, Object arg) {
         SliderView sliderView = (SliderView) arg;
         int index = sliderView.getId();
         int value = sliderView.getValue();
-        Log.d(TAG, "value: " + value);
+        Log.d(TAG, "index = " + index + " value = " + value);
 
-        /*
-        brushList[index] = value;
-
-        BrushData.Property property = property(index);
-        if (property == BrushData.Property.HUE ||
-                property == BrushData.Property.SATURATION ||
-                property == BrushData.Property.VALUE ||
-                property == BrushData.Property.FLOW ||
-                property == BrushData.Property.OPACITY ||
-                property == BrushData.Property.HARDNESS) {
-            setupColor();
+        switch (index) {
+            case SIZE:
+                size = value;
+                dabBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+                dabCanvas.setBitmap(dabBitmap);
+                setDabColor(color);
+                break;
+            case OPACITY:
+                color = Color.argb(value * 255 / 100, Color.red(color), Color.green(color), Color.blue(color));
+                setDabColor(color);
+                break;
+            case SPACING: spacing = value; break;
         }
-        */
     }
 }

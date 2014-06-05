@@ -72,6 +72,10 @@ public class SliderView extends RelativeLayout {
         sliderObservable.addObserver(observer);
     }
 
+    public void notifyObservers() {
+        sliderObservable.notifyObservers();
+    }
+
     private void initComponent() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.brush_slider, this, true);

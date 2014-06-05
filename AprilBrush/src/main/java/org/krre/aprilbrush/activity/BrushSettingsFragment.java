@@ -36,6 +36,7 @@ public class BrushSettingsFragment extends Fragment {
             sliderView.setValue(brushValues[i]);
             sliderView.setId(i);
             sliderView.addObserver(mainActivity.getBrushEngine());
+            sliderView.notifyObservers();
 
             layout.addView(sliderView);
         }
