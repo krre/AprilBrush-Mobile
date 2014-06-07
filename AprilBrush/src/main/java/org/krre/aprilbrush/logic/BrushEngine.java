@@ -22,7 +22,8 @@ import java.util.Observer;
 public class BrushEngine implements Observer {
     public static final int SIZE = 0;
     public static final int OPACITY = 1;
-    public static final int SPACING = 2;
+    public static final int FLOW = 2;
+    public static final int SPACING = 3;
 
 
     private static BrushEngine brushEngine;
@@ -98,11 +99,6 @@ public class BrushEngine implements Observer {
         bufferCanvas.setBitmap(bufferBitmap);
     }
 
-    public void clear() {
-        bufferBitmap.eraseColor(Color.TRANSPARENT);
-        paintView.invalidate();
-    }
-
     public void paintDab(MotionEvent event) {
         toolType = event.getToolType(0);
         if (toolType == MotionEvent.TOOL_TYPE_FINGER && GlobalVar.getInstance().isPenMode()) {
@@ -135,6 +131,8 @@ public class BrushEngine implements Observer {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                paintView.applyBuffer();
+                bufferBitmap.eraseColor(Color.TRANSPARENT);
                 break;
         }
     }
@@ -188,6 +186,9 @@ public class BrushEngine implements Observer {
                 setDabColor(color);
                 break;
             case OPACITY:
+                paintView.setOpacity(value);
+                break;
+            case FLOW:
                 color = Color.argb(value * 255 / 100, Color.red(color), Color.green(color), Color.blue(color));
                 setDabColor(color);
                 break;

@@ -20,6 +20,7 @@ import org.krre.aprilbrush.view.SliderView;
 public class MainActivity extends Activity {
     private String TAG = "AB";
     private BrushEngine brushEngine;
+    private PaintView paintView;
 
     public BrushEngine getBrushEngine() {
         return brushEngine;
@@ -30,7 +31,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        PaintView paintView = (PaintView)findViewById(R.id.paintView);
+        paintView = (PaintView)findViewById(R.id.paintView);
         brushEngine = paintView.getBrushEngine();
 
         ToggleButton penToggleButton = (ToggleButton)findViewById(R.id.penToggleButton);
@@ -113,6 +114,6 @@ public class MainActivity extends Activity {
     }
 
     public void onClearButtonClick(View v) {
-        brushEngine.clear();
+        paintView.clear();
     }
 }

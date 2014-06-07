@@ -4,11 +4,13 @@
         name="brush_names">
         <item><string name="size">"Size"</string></item>
         <item><string name="opacity">"Opacity"</string></item>
+        <item><string name="flow">"Flow"</string></item>
         <item><string name="spacing">"Spacing"</string></item>
     </string-array>
     <integer-array
         name="brush_mins">
         <item>1</item>
+        <item>0</item>
         <item>0</item>
         <item>1</item>
     </integer-array>
@@ -17,11 +19,13 @@
         <item>150</item>
         <item>100</item>
         <item>100</item>
+        <item>100</item>
     </integer-array>
     <integer-array
         name="brush_values">
         <item>20</item>
-        <item>90</item>
+        <item>50</item>
+        <item>80</item>
         <item>15</item>
     </integer-array>
 </resources>
