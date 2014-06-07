@@ -7,10 +7,10 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import org.krre.aprilbrush.R;
+
 import java.util.Observable;
 import java.util.Observer;
-
-import org.krre.aprilbrush.R;
 
 public class SliderView extends RelativeLayout {
     protected SeekBar seekBar;
@@ -70,10 +70,6 @@ public class SliderView extends RelativeLayout {
 
     public void addObserver(Observer observer) {
         sliderObservable.addObserver(observer);
-    }
-
-    public void notifyObservers() {
-        sliderObservable.notifyObservers();
     }
 
     private void initComponent() {

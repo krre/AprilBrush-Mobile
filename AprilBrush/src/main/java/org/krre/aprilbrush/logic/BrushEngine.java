@@ -191,7 +191,9 @@ public class BrushEngine implements Observer {
                 color = Color.argb(value * 255 / 100, Color.red(color), Color.green(color), Color.blue(color));
                 setDabColor(color);
                 break;
-            case SPACING: spacing = value; break;
+            case SPACING:
+                spacing = value;
+                break;
         }
     }
 }

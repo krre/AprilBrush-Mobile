@@ -52,15 +52,13 @@ public class MainActivity extends Activity {
 
         for (int i = 0; i < brushNames.length; i++) {
             SliderView sliderView = new SliderView(getBaseContext());
+            layout.addView(sliderView);
+            sliderView.addObserver(brushEngine);
+            sliderView.setId(i);
             sliderView.setName(brushNames[i]);
             sliderView.setMin(brushMins[i]);
             sliderView.setMax(brushMaxes[i]);
             sliderView.setValue(brushValues[i]);
-            sliderView.setId(i);
-            sliderView.addObserver(brushEngine);
-            sliderView.notifyObservers();
-
-            layout.addView(sliderView);
         }
     }
 
