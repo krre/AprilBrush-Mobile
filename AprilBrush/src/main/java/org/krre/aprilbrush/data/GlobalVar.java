@@ -1,14 +1,14 @@
 package org.krre.aprilbrush.data;
 
 import android.os.Build;
+import android.util.Log;
 
 public class GlobalVar {
     private final String TAG = "AB";
     private static GlobalVar globalVar = new GlobalVar();
     private boolean penMode = false;
     private int memoryClass;
-
-    private final boolean isEmulator = Build.BRAND.equals("generic");
+    private final boolean isEmulator =  Build.BRAND.contains("generic");
 
     private GlobalVar() {
         setPenMode(!isEmulator);

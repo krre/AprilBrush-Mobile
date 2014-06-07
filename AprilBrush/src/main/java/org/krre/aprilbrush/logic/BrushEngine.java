@@ -179,7 +179,6 @@ public class BrushEngine implements Observer {
         SliderView sliderView = (SliderView) arg;
         int index = sliderView.getId();
         int value = sliderView.getValue();
-        Log.d(TAG, "index = " + index + " value = " + value);
 
         switch (index) {
             case SIZE:
