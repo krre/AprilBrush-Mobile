@@ -57,9 +57,10 @@ public class BrushEngine implements Observer {
     public BrushEngine(PaintView paintView) {
         BrushEngine.brushEngine = this;
         this.paintView = paintView;
+        dabPaint.setAntiAlias(true);
         dabBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
         dabCanvas.setBitmap(dabBitmap);
-        setDabColor(color);
+        updateDab();
     }
 
     public static BrushEngine getInstance() {
@@ -72,11 +73,10 @@ public class BrushEngine implements Observer {
 
     public void setColor(int color) {
         this.color = color;
-        setDabColor(color);
+        updateDab();
     }
 
-    private void setDabColor(int color) {
-        dabPaint.setAntiAlias(true);
+    private void updateDab() {
         dabPaint.setColor(color);
         dabBitmap.eraseColor(Color.TRANSPARENT);
         float radius = (100 - hardness) / 100f * size / 4;
@@ -202,29 +202,29 @@ public class BrushEngine implements Observer {
                 size = value;
                 dabBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
                 dabCanvas.setBitmap(dabBitmap);
-                setDabColor(color);
+                updateDab();
                 break;
             case OPACITY:
                 paintView.setOpacity(value);
                 break;
             case FLOW:
                 color = Color.argb(value * 255 / 100, Color.red(color), Color.green(color), Color.blue(color));
-                setDabColor(color);
+                updateDab();
                 break;
             case SPACING:
                 spacing = value;
                 break;
             case HARDNESS:
                 hardness = value;
-                setDabColor(color);
+                updateDab();
                 break;
             case ROUNDNESS:
                 roundness = value;
-                setDabColor(color);
+                updateDab();
                 break;
             case ANGLE:
                 angle = value;
-                setDabColor(color);
+                updateDab();
                 break;
             case SCATTER:
                 scatter = value;
