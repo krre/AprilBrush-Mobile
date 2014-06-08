@@ -27,6 +27,7 @@ public class BrushEngine implements Observer {
     public static final int HARDNESS = 4;
     public static final int ROUNDNESS = 5;
     public static final int ANGLE = 6;
+    public static final int SCATTER = 7;
 
     private static BrushEngine brushEngine;
     private String TAG = "AB";
@@ -51,6 +52,7 @@ public class BrushEngine implements Observer {
     private int hardness = 80;
     private int roundness = 100;
     private int angle = 0;
+    private int scatter = 0;
 
     public BrushEngine(PaintView paintView) {
         BrushEngine.brushEngine = this;
@@ -182,8 +184,9 @@ public class BrushEngine implements Observer {
         bufferCanvas.save();
         int alpha = Math.round((pressure * 255f));
         bufferPaint.setAlpha(alpha);
-        float paintX = x - size / 2f;
-        float paintY = y - size / 2f;
+        float paintX = x - size / 2f + size * scatter / 100f * (1 - 2 * (float) Math.random());
+        float paintY = y - size / 2f + size * scatter / 100f * (1 - 2 * (float) Math.random());
+
         bufferCanvas.drawBitmap(dabBitmap, paintX, paintY, bufferPaint);
         bufferCanvas.restore();
         paintView.invalidate((int)paintX - 1, (int)paintY - 1, (int)paintX + size + 1, (int)paintY + size + 1);
@@ -222,6 +225,9 @@ public class BrushEngine implements Observer {
             case ANGLE:
                 angle = value;
                 setDabColor(color);
+                break;
+            case SCATTER:
+                scatter = value;
                 break;
         }
     }
