@@ -8,6 +8,7 @@
         <item><string name="spacing">"Spacing"</string></item>
         <item><string name="hardness">"Hardness"</string></item>
         <item><string name="roundness">"Roundness"</string></item>
+        <item><string name="angle">"Angle"</string></item>
     </string-array>
     <integer-array
         name="brush_mins">
@@ -17,6 +18,7 @@
         <item>1</item>
         <item>0</item>
         <item>1</item>
+        <item>0</item>
     </integer-array>
     <integer-array
         name="brush_maxes">
@@ -26,6 +28,7 @@
         <item>100</item>
         <item>100</item>
         <item>100</item>
+        <item>360</item>
     </integer-array>
     <integer-array
         name="brush_values">
@@ -35,5 +38,6 @@
         <item>20</item>
         <item>80</item>
         <item>100</item>
+        <item>0</item>
     </integer-array>
 </resources>

@@ -9,6 +9,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import org.krre.aprilbrush.data.GlobalVar;
@@ -25,6 +26,7 @@ public class BrushEngine implements Observer {
     public static final int SPACING = 3;
     public static final int HARDNESS = 4;
     public static final int ROUNDNESS = 5;
+    public static final int ANGLE = 6;
 
     private static BrushEngine brushEngine;
     private String TAG = "AB";
@@ -48,7 +50,7 @@ public class BrushEngine implements Observer {
     private int color = Color.BLUE;
     private int hardness = 80;
     private int roundness = 100;
-
+    private int angle = 0;
 
     public BrushEngine(PaintView paintView) {
         BrushEngine.brushEngine = this;
@@ -83,6 +85,7 @@ public class BrushEngine implements Observer {
             dabPaint.setMaskFilter(null);
         }
         dabCanvas.save();
+        dabCanvas.rotate(angle, size / 2f, size / 2f);
         dabCanvas.scale(1.0f, roundness / 100f, size / 2f, size / 2f);
         dabCanvas.drawCircle(size / 2f, size / 2f, size / 2f - radius, dabPaint);
         dabCanvas.restore();
@@ -215,6 +218,11 @@ public class BrushEngine implements Observer {
             case ROUNDNESS:
                 roundness = value;
                 setDabColor(color);
+                break;
+            case ANGLE:
+                angle = value;
+                setDabColor(color);
+                break;
         }
     }
 }
