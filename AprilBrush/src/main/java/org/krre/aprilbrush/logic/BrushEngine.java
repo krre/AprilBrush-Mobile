@@ -24,6 +24,7 @@ public class BrushEngine implements Observer {
     public static final int FLOW = 2;
     public static final int SPACING = 3;
     public static final int HARDNESS = 4;
+    public static final int ROUNDNESS = 5;
 
     private static BrushEngine brushEngine;
     private String TAG = "AB";
@@ -46,6 +47,8 @@ public class BrushEngine implements Observer {
     private int spacing = 100;
     private int color = Color.BLUE;
     private int hardness = 80;
+    private int roundness = 100;
+
 
     public BrushEngine(PaintView paintView) {
         BrushEngine.brushEngine = this;
@@ -79,7 +82,10 @@ public class BrushEngine implements Observer {
         } else {
             dabPaint.setMaskFilter(null);
         }
+        dabCanvas.save();
+        dabCanvas.scale(1.0f, roundness / 100f, size / 2f, size / 2f);
         dabCanvas.drawCircle(size / 2f, size / 2f, size / 2f - radius, dabPaint);
+        dabCanvas.restore();
     }
 
     public Bitmap getBufferBitmap() {
@@ -147,7 +153,7 @@ public class BrushEngine implements Observer {
     private void interpolateDab(float x, float y, float p) {
         double pointSpace = Math.sqrt(Math.pow(prevX - x, 2) + Math.pow(prevY - y, 2));
 
-        float deltaDab = size * spacing / 100f;
+        float deltaDab = size * roundness / 100f * spacing / 100f;
         if (pointSpace >= deltaDab) {
             path.quadTo(prevX, prevY, (x + prevX) / 2, (y + prevY) / 2);
         } else {
@@ -206,6 +212,9 @@ public class BrushEngine implements Observer {
                 hardness = value;
                 setDabColor(color);
                 break;
+            case ROUNDNESS:
+                roundness = value;
+                setDabColor(color);
         }
     }
 }
