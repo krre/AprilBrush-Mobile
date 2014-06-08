@@ -1,20 +1,19 @@
 package org.krre.aprilbrush.logic;
 
-import android.util.Log;
-import android.view.MotionEvent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Paint;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.view.MotionEvent;
 
 import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.view.PaintView;
 import org.krre.aprilbrush.view.SliderView;
-
-import android.graphics.Path;
-import android.graphics.PathMeasure;
-import android.content.res.Configuration;
-import android.graphics.Matrix;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -24,7 +23,7 @@ public class BrushEngine implements Observer {
     public static final int OPACITY = 1;
     public static final int FLOW = 2;
     public static final int SPACING = 3;
-
+    public static final int HARDNESS = 4;
 
     private static BrushEngine brushEngine;
     private String TAG = "AB";
@@ -46,6 +45,7 @@ public class BrushEngine implements Observer {
     private int size = 20;
     private int spacing = 100;
     private int color = Color.BLUE;
+    private int hardness = 80;
 
     public BrushEngine(PaintView paintView) {
         BrushEngine.brushEngine = this;
@@ -72,7 +72,14 @@ public class BrushEngine implements Observer {
         dabPaint.setAntiAlias(true);
         dabPaint.setColor(color);
         dabBitmap.eraseColor(Color.TRANSPARENT);
-        dabCanvas.drawCircle(size / 2f, size / 2f, size / 2f, dabPaint);
+        float radius = (100 - hardness) / 100f * size / 4;
+        if (radius > 0) {
+            // TODO: change box blur on gaussian blur
+            dabPaint.setMaskFilter(new BlurMaskFilter(radius, BlurMaskFilter.Blur.NORMAL));
+        } else {
+            dabPaint.setMaskFilter(null);
+        }
+        dabCanvas.drawCircle(size / 2f, size / 2f, size / 2f - radius, dabPaint);
     }
 
     public Bitmap getBufferBitmap() {
@@ -194,6 +201,10 @@ public class BrushEngine implements Observer {
                 break;
             case SPACING:
                 spacing = value;
+                break;
+            case HARDNESS:
+                hardness = value;
+                setDabColor(color);
                 break;
         }
     }

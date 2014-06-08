@@ -6,6 +6,7 @@
         <item><string name="opacity">"Opacity"</string></item>
         <item><string name="flow">"Flow"</string></item>
         <item><string name="spacing">"Spacing"</string></item>
+        <item><string name="hardness">"Hardness"</string></item>
     </string-array>
     <integer-array
         name="brush_mins">
@@ -13,19 +14,22 @@
         <item>0</item>
         <item>0</item>
         <item>1</item>
+        <item>0</item>
     </integer-array>
     <integer-array
         name="brush_maxes">
-        <item>150</item>
+        <item>300</item>
+        <item>100</item>
         <item>100</item>
         <item>100</item>
         <item>100</item>
     </integer-array>
     <integer-array
         name="brush_values">
-        <item>20</item>
-        <item>50</item>
+        <item>40</item>
+        <item>60</item>
         <item>80</item>
-        <item>15</item>
+        <item>20</item>
+        <item>80</item>
     </integer-array>
 </resources>
