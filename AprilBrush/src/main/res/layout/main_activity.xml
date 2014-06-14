@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background"
+        android:background="@drawable/view_background"
         android:id="@+id/relativeLayout">
 
         <Button
@@ -72,7 +72,7 @@
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="false"
-        android:background="@drawable/background"
+        android:background="@drawable/view_background"
         android:visibility="invisible" />
 
     <ScrollView
@@ -80,7 +80,7 @@
         android:layout_height="match_parent"
         android:id="@+id/brushSettingsScrollView"
         android:layout_below="@+id/relativeLayout"
-        android:background="@drawable/background"
+        android:background="@drawable/view_background"
         android:visibility="invisible"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="false">
