@@ -41,9 +41,13 @@ public final class PaintView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.translate(transform.getPan().x, transform.getPan().y);
+        float zoom = transform.getZoom();
+        float dx = transform.getPan().x / zoom;
+        float dy = transform.getPan().y / zoom;
+
+        canvas.translate(dx, dy);
         canvas.rotate(transform.getRotate());
-        canvas.scale(transform.getZoom(), transform.getZoom());
+        canvas.scale(zoom, zoom, mainBitmap.getWidth() / 2f, mainBitmap.getHeight() / 2f);
         canvas.drawBitmap(mainBitmap, 0, 0, mainPaint);
         canvas.drawBitmap(brushEngine.getBufferBitmap(), 0, 0, bufferPaint);
     }

@@ -21,6 +21,7 @@ public final class Transform {
     private PaintView paintView;
     private PointF touchPoint;
     private PointF prevPan = new PointF(0, 0);
+    private float prevZoom = 1.0f;
 
     public Transform(PaintView paintView) {
         this.paintView = paintView;
@@ -61,14 +62,24 @@ public final class Transform {
                 touchPoint = new PointF(event.getX(), event.getY());
                 break;
             case MotionEvent.ACTION_MOVE:
+                float dx = event.getX() - touchPoint.x;
+                float dy = event.getY() - touchPoint.y;
                 if (currentTransform == PAN) {
-                    pan.x = prevPan.x + event.getX() - touchPoint.x;
-                    pan.y = prevPan.y + event.getY() - touchPoint.y;
-                    paintView.invalidate();
+                    pan.x = prevPan.x + dx;
+                    pan.y = prevPan.y + dy;
+                } else if (currentTransform == ZOOM) {
+                    if (dx > 0 & dy > 0) {
+                        zoom = prevZoom * (1 + (float)Math.sqrt(dx * dx + dy * dy) / 10);
+                    } else if (dx < 0 & dy < 0) {
+                        zoom = prevZoom / (1 + (float)Math.sqrt(dx * dx + dy * dy) / 10);
+                    }
+                    Log.d(TAG, "dx = " + dx + " dy = " + dy + " zoom = " + zoom);
                 }
+                paintView.invalidate();
                 break;
             case MotionEvent.ACTION_UP:
                 prevPan.set(pan.x, pan.y);
+                prevZoom = zoom;
                 break;
         }
     }
