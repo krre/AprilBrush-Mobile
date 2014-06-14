@@ -7,5 +7,9 @@
     <string name="clear">Clear</string>
     <string name="pen">Pen</string>
     <string name="finger">Finger</string>
+    <string name="paint">Paint</string>
+    <string name="pan">Pan</string>
+    <string name="zoom">Zoom</string>
+    <string name="rotate">Rotate</string>
 
 </resources>

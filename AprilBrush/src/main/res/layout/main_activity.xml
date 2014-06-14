@@ -18,6 +18,59 @@
         android:background="@drawable/view_background"
         android:id="@+id/relativeLayout">
 
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/penToggleButton"
+            android:textOn="@string/pen"
+            android:textOff="@string/finger"
+            android:layout_marginLeft="@dimen/control_margin"
+            android:onClick="onPenToggleClick" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paint"
+            android:id="@+id/paintButton"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/penToggleButton"
+            android:layout_marginLeft="@dimen/control_margin"
+            android:onClick="onPaintButtonClick" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pan"
+            android:id="@+id/panButton"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/paintButton"
+            android:layout_marginLeft="@dimen/control_margin"
+            android:onClick="onPanButtonClick" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zoom"
+            android:id="@+id/zoomButton"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/panButton"
+            android:layout_marginLeft="@dimen/control_margin"
+            android:onClick="onZoomButtonClick" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rotate"
+            android:id="@+id/rotateButton"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/zoomButton"
+            android:layout_marginLeft="@dimen/control_margin"
+            android:onClick="onRotateButtonClick" />
+
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -51,16 +104,6 @@
             android:layout_alignParentEnd="false"
             android:layout_marginLeft="@dimen/control_margin"
             android:layout_marginRight="@dimen/control_margin" />
-
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New ToggleButton"
-            android:id="@+id/penToggleButton"
-            android:textOn="@string/pen"
-            android:textOff="@string/finger"
-            android:layout_marginLeft="@dimen/control_margin"
-            android:onClick="onPenToggleClick" />
 
     </RelativeLayout>
 

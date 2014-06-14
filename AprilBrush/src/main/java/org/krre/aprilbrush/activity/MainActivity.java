@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -81,6 +82,22 @@ public class MainActivity extends Activity {
     public void onPenToggleClick(View v) {
         ToggleButton tb = (ToggleButton)v;
         GlobalVar.getInstance().setPenMode(tb.isChecked());
+    }
+
+    public void onPaintButtonClick(View v) {
+        Log.d(TAG, "paint mode");
+    }
+
+    public void onPanButtonClick(View v) {
+        Log.d(TAG, "pan mode");
+    }
+
+    public void onZoomButtonClick(View v) {
+        Log.d(TAG, "zoom mode");
+    }
+
+    public void onRotateButtonClick(View v) {
+        Log.d(TAG, "rotate mode");
     }
 
     public void onColorButtonClick(View v) {
