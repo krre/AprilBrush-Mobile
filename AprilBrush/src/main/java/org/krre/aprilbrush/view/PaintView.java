@@ -37,7 +37,6 @@ public class PaintView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.WHITE);
         canvas.drawBitmap(mainBitmap, 0, 0, mainPaint);
         canvas.drawBitmap(brushEngine.getBufferBitmap(), 0, 0, bufferPaint);
     }
