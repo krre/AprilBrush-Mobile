@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
 import org.krre.aprilbrush.R;
 import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.logic.BrushEngine;
+import org.krre.aprilbrush.logic.Transform;
 import org.krre.aprilbrush.view.PaintView;
 import org.krre.aprilbrush.view.SliderView;
 
@@ -85,19 +86,23 @@ public class MainActivity extends Activity {
     }
 
     public void onPaintButtonClick(View v) {
-        Log.d(TAG, "paint mode");
+        Transform.setMode(Transform.NONE);
     }
 
     public void onPanButtonClick(View v) {
-        Log.d(TAG, "pan mode");
+        Transform.setMode(Transform.PAN);
     }
 
     public void onZoomButtonClick(View v) {
-        Log.d(TAG, "zoom mode");
+        Transform.setMode(Transform.ZOOM);
     }
 
     public void onRotateButtonClick(View v) {
-        Log.d(TAG, "rotate mode");
+        Transform.setMode(Transform.ROTATE);
+    }
+
+    public void onResetButtonClick(View v) {
+       paintView.resetTransform();
     }
 
     public void onColorButtonClick(View v) {
