@@ -3,11 +3,8 @@ package org.krre.aprilbrush.view;
 import android.content.Context;
 import android.graphics.PointF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
-import org.krre.aprilbrush.R;
 
 public class TransformView extends View {
     private final String TAG = "AB";
@@ -20,13 +17,13 @@ public class TransformView extends View {
     private PointF pan = new PointF(0, 0);;
     private float zoom = 1.0f;
     private float rotate = 0;
-
-    private int currentTransform;
-
-    private View view;
-    private PointF touchPoint;
     private PointF prevPan = new PointF(0, 0);
     private float prevZoom = 1.0f;
+    private float prevRotate = 0;
+
+    private int currentTransform;
+    private View view;
+    private PointF touchPoint;
 
     public TransformView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -51,9 +48,12 @@ public class TransformView extends View {
         view.setTranslationX(pan.x);
         view.setTranslationY(pan.y);
         zoom = 1.0f;
+        prevZoom = 1.0f;
         view.setScaleX(zoom);
         view.setScaleY(zoom);
         rotate = 0;
+        prevRotate = 0;
+        view.setRotation(rotate);
 
         currentTransform = NONE;
         setVisibility(INVISIBLE);
@@ -86,12 +86,15 @@ public class TransformView extends View {
                     }
                     view.setScaleX(zoom);
                     view.setScaleY(zoom);
+                } else if (currentTransform == ROTATE) {
+                    rotate = prevRotate + dy;
+                    view.setRotation(rotate);
                 }
-//                Log.d(TAG, "dx = " + dx + " dy = " + dy + " zoom = " + zoom);
                 break;
             case MotionEvent.ACTION_UP:
                 prevPan.set(pan.x, pan.y);
                 prevZoom = zoom;
+                prevRotate = rotate;
                 break;
         }
         return true;
