@@ -1,62 +1,71 @@
-package org.krre.aprilbrush.logic;
+package org.krre.aprilbrush.view;
 
+import android.content.Context;
 import android.graphics.PointF;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
-import org.krre.aprilbrush.view.PaintView;
+import org.krre.aprilbrush.R;
 
-public final class Transform {
+public class TransformView extends View {
     private final String TAG = "AB";
+
     public static final int NONE = 0;
     public static final int PAN = 1;
     public static final int ZOOM = 2;
     public static final int ROTATE = 3;
 
-    private PointF pan;
-    private float zoom;
-    private float rotate;
+    private PointF pan = new PointF(0, 0);;
+    private float zoom = 1.0f;
+    private float rotate = 0;
 
-    private static int currentTransform;
-    private PaintView paintView;
+    private int currentTransform;
+
+    private View view;
     private PointF touchPoint;
     private PointF prevPan = new PointF(0, 0);
     private float prevZoom = 1.0f;
 
-    public Transform(PaintView paintView) {
-        this.paintView = paintView;
-        reset();
+    public TransformView(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
 
-    public static void setMode(int mode) {
-        currentTransform = mode;
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public void setCurrentTransform(int currentTransform) {
+        this.currentTransform = currentTransform;
+        if (currentTransform > 0) {
+            setVisibility(View.VISIBLE);
+        } else {
+            setVisibility(INVISIBLE);
+        }
     }
 
     public void reset() {
         pan = new PointF(0, 0);
+        prevPan = new PointF(0, 0);
+        view.setTranslationX(pan.x);
+        view.setTranslationY(pan.y);
         zoom = 1.0f;
+        view.setScaleX(zoom);
+        view.setScaleY(zoom);
         rotate = 0;
+
         currentTransform = NONE;
-        paintView.invalidate();
+        setVisibility(INVISIBLE);
     }
 
-    public PointF getPan() {
-        return pan;
+    @Override
+    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
     }
 
-    public float getZoom() {
-        return zoom;
-    }
-
-    public float getRotate() {
-        return rotate;
-    }
-
-    public int getCurrentTransform() {
-        return currentTransform;
-    }
-
-    public void change(MotionEvent event) {
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 touchPoint = new PointF(event.getX(), event.getY());
@@ -66,21 +75,25 @@ public final class Transform {
                 float dy = event.getY() - touchPoint.y;
                 if (currentTransform == PAN) {
                     pan.x = prevPan.x + dx;
+                    view.setTranslationX(pan.x);
                     pan.y = prevPan.y + dy;
+                    view.setTranslationY(pan.y);
                 } else if (currentTransform == ZOOM) {
                     if (dx > 0 & dy > 0) {
                         zoom = prevZoom * (1 + (float)Math.sqrt(dx * dx + dy * dy) / 10);
                     } else if (dx < 0 & dy < 0) {
                         zoom = prevZoom / (1 + (float)Math.sqrt(dx * dx + dy * dy) / 10);
                     }
-                    Log.d(TAG, "dx = " + dx + " dy = " + dy + " zoom = " + zoom);
+                    view.setScaleX(zoom);
+                    view.setScaleY(zoom);
                 }
-                paintView.invalidate();
+//                Log.d(TAG, "dx = " + dx + " dy = " + dy + " zoom = " + zoom);
                 break;
             case MotionEvent.ACTION_UP:
                 prevPan.set(pan.x, pan.y);
                 prevZoom = zoom;
                 break;
         }
+        return true;
     }
 }

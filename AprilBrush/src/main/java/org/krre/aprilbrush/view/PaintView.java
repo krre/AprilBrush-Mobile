@@ -5,14 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import org.krre.aprilbrush.logic.BrushEngine;
-import org.krre.aprilbrush.logic.Transform;
 
 public final class PaintView extends View {
     private String TAG = "AB";
@@ -20,7 +17,6 @@ public final class PaintView extends View {
     private Paint mainPaint = new Paint();
     private Paint bufferPaint = new Paint();
     private BrushEngine brushEngine = new BrushEngine(this);
-    private Transform transform = new Transform(this);
     public BrushEngine getBrushEngine() {
         return brushEngine;
     }
@@ -41,39 +37,19 @@ public final class PaintView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        float zoom = transform.getZoom();
-        float dx = transform.getPan().x / zoom;
-        float dy = transform.getPan().y / zoom;
-
-        canvas.translate(dx, dy);
-        canvas.rotate(transform.getRotate());
-        canvas.scale(zoom, zoom, mainBitmap.getWidth() / 2f, mainBitmap.getHeight() / 2f);
         canvas.drawBitmap(mainBitmap, 0, 0, mainPaint);
         canvas.drawBitmap(brushEngine.getBufferBitmap(), 0, 0, bufferPaint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (transform.getCurrentTransform() == Transform.NONE) {
-            brushEngine.paintDab(event);
-        } else {
-            transform.change(event);
-        }
-
+        brushEngine.paintDab(event);
         return true;
     }
 
     public void clear() {
         mainBitmap.eraseColor(Color.TRANSPARENT);
         invalidate();
-    }
-
-    public void resetTransform() {
-        transform.reset();
-    }
-
-    public Transform getTransform() {
-        return transform;
     }
 
     public void setOpacity(int opacity) {

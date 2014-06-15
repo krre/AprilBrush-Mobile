@@ -182,7 +182,6 @@ public final class BrushEngine implements Observer {
     private void paintOneDab(float x, float y, float p) {
         float pressure = toolType == MotionEvent.TOOL_TYPE_STYLUS ? p : 1.0f;
         bufferCanvas.save();
-        bufferCanvas.translate(-paintView.getTransform().getPan().x, -paintView.getTransform().getPan().y);
         int alpha = Math.round((pressure * 255f));
         bufferPaint.setAlpha(alpha);
         float paintX = x - size / 2f + size * scatter / 100f * (1 - 2 * (float) Math.random());

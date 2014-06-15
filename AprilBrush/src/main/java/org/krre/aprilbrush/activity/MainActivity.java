@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -15,14 +14,15 @@ import android.widget.ToggleButton;
 import org.krre.aprilbrush.R;
 import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.logic.BrushEngine;
-import org.krre.aprilbrush.logic.Transform;
 import org.krre.aprilbrush.view.PaintView;
+import org.krre.aprilbrush.view.TransformView;
 import org.krre.aprilbrush.view.SliderView;
 
 public class MainActivity extends Activity {
     private String TAG = "AB";
     private BrushEngine brushEngine;
     private PaintView paintView;
+    private TransformView transformView;
 
     public BrushEngine getBrushEngine() {
         return brushEngine;
@@ -34,6 +34,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_activity);
 
         paintView = (PaintView)findViewById(R.id.paintView);
+        transformView = (TransformView)findViewById(R.id.transformView);
+        transformView.setView(paintView);
         brushEngine = paintView.getBrushEngine();
 
         ToggleButton penToggleButton = (ToggleButton)findViewById(R.id.penToggleButton);
@@ -86,23 +88,23 @@ public class MainActivity extends Activity {
     }
 
     public void onPaintButtonClick(View v) {
-        Transform.setMode(Transform.NONE);
+        transformView.setCurrentTransform(TransformView.NONE);
     }
 
     public void onPanButtonClick(View v) {
-        Transform.setMode(Transform.PAN);
+        transformView.setCurrentTransform(TransformView.PAN);
     }
 
     public void onZoomButtonClick(View v) {
-        Transform.setMode(Transform.ZOOM);
+        transformView.setCurrentTransform(TransformView.ZOOM);
     }
 
     public void onRotateButtonClick(View v) {
-        Transform.setMode(Transform.ROTATE);
+        transformView.setCurrentTransform(TransformView.ROTATE);
     }
 
     public void onResetButtonClick(View v) {
-       paintView.resetTransform();
+        transformView.reset();
     }
 
     public void onColorButtonClick(View v) {

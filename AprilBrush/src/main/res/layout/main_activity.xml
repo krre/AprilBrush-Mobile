@@ -8,15 +8,22 @@
         android:id="@+id/paintView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
+        android:clickable="false"
         android:background="@color/canvas_background" />
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="org.krre.aprilbrush.view.TransformView"
+        android:id="@+id/transformView"
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/view_background"
-        android:id="@+id/relativeLayout">
+        android:id="@+id/topBarLayout">
 
         <ToggleButton
             android:layout_width="wrap_content"
@@ -124,7 +131,7 @@
         class="org.krre.aprilbrush.view.ColorPickerView"
         android:id="@+id/colorpickerView"
         android:layout_gravity="right|top"
-        android:layout_below="@+id/relativeLayout"
+        android:layout_below="@+id/topBarLayout"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="false"
         android:background="@drawable/view_background"
@@ -134,7 +141,7 @@
         android:layout_width="400dp"
         android:layout_height="match_parent"
         android:id="@+id/brushSettingsScrollView"
-        android:layout_below="@+id/relativeLayout"
+        android:layout_below="@+id/topBarLayout"
         android:background="@drawable/view_background"
         android:visibility="invisible"
         android:layout_alignParentRight="true"
