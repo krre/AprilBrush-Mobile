@@ -14,7 +14,7 @@ public class TransformView extends View {
     public static final int ZOOM = 2;
     public static final int ROTATE = 3;
 
-    private PointF pan = new PointF(0, 0);;
+    private PointF pan = new PointF(0, 0);
     private float zoom = 1.0f;
     private float rotate = 0;
     private PointF prevPan = new PointF(0, 0);

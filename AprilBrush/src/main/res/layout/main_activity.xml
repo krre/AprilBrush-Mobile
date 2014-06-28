@@ -150,7 +150,32 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"></LinearLayout>
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_to_library"
+                    android:id="@+id/addToLibraryButton"
+                    android:layout_marginLeft="@dimen/control_margin"
+                    android:onClick="onAddToLibraryClick" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset"
+                    android:id="@+id/resetBrushButton"
+                    android:layout_marginLeft="@dimen/control_margin"
+                    android:onClick="onResetBrushClick" />
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>

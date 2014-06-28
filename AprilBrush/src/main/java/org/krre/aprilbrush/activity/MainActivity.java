@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -139,5 +140,13 @@ public class MainActivity extends Activity {
 
     public void onClearButtonClick(View v) {
         paintView.clear();
+    }
+
+    public void onAddToLibraryClick(View v) {
+        Log.d(TAG, "add to library");
+    }
+
+    public void onResetBrushClick(View v) {
+        Log.d(TAG, "reset brush");
     }
 }
