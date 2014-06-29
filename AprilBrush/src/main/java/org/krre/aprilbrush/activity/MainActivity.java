@@ -3,13 +3,10 @@ package org.krre.aprilbrush.activity;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import org.krre.aprilbrush.R;
@@ -17,7 +14,6 @@ import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.logic.BrushEngine;
 import org.krre.aprilbrush.view.BrushSettingsView;
 import org.krre.aprilbrush.view.PaintView;
-import org.krre.aprilbrush.view.SliderView;
 import org.krre.aprilbrush.view.TransformView;
 
 public class MainActivity extends Activity {
@@ -25,6 +21,11 @@ public class MainActivity extends Activity {
     private BrushEngine brushEngine = BrushEngine.getInstance();
     private PaintView paintView;
     private TransformView transformView;
+
+    private View colorPickerTool;
+    private View brushSettingsTool;
+    private View brushLibraryTool;
+    private View currentTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,10 @@ public class MainActivity extends Activity {
         paintView = (PaintView)findViewById(R.id.paintView);
         transformView = (TransformView)findViewById(R.id.transformView);
         transformView.setView(paintView);
+
+        colorPickerTool = findViewById(R.id.colorpickerTool);
+        brushSettingsTool = findViewById(R.id.brushSettingsTool);
+        brushLibraryTool = findViewById(R.id.brushLibraryTool);
 
         ToggleButton penToggleButton = (ToggleButton)findViewById(R.id.penToggleButton);
         penToggleButton.setChecked(GlobalVar.getInstance().isPenMode());
@@ -84,33 +89,15 @@ public class MainActivity extends Activity {
     }
 
     public void onColorButtonClick(View v) {
-        View colorPickerView = findViewById(R.id.colorpickerView);
-        View brushSettingsScrollView = findViewById(R.id.brushSettingsLayout);
-
-        if (brushSettingsScrollView.getVisibility() == View.VISIBLE) {
-            brushSettingsScrollView.setVisibility(View.INVISIBLE);
-        }
-
-        if (colorPickerView.getVisibility() == View.VISIBLE) {
-            colorPickerView.setVisibility(View.INVISIBLE);
-        } else {
-            colorPickerView.setVisibility(View.VISIBLE);
-        }
+        switchTool(colorPickerTool);
     }
 
     public void onBrushButtonClick(View v) {
-        View brushSettingsScrollView = findViewById(R.id.brushSettingsLayout);
-        View colorPickerView = findViewById(R.id.colorpickerView);
+        switchTool(brushSettingsTool);
+    }
 
-        if (colorPickerView.getVisibility() == View.VISIBLE) {
-            colorPickerView.setVisibility(View.INVISIBLE);
-        }
-
-        if (brushSettingsScrollView.getVisibility() == View.VISIBLE) {
-            brushSettingsScrollView.setVisibility(View.INVISIBLE);
-        } else {
-            brushSettingsScrollView.setVisibility(View.VISIBLE);
-        }
+    public void onLibraryButtonClick(View v) {
+        switchTool(brushLibraryTool);
     }
 
     public void onClearButtonClick(View v) {
@@ -124,5 +111,40 @@ public class MainActivity extends Activity {
     public void onResetBrushClick(View v) {
         BrushSettingsView brushSettingsView = (BrushSettingsView)findViewById(R.id.brushSettingsView);
         brushSettingsView.reset();
+    }
+
+    // brush library buttons
+    public void onNewBrushButtonClick(View v) {
+
+    }
+
+    public void onEditBrushButtonClick(View v) {
+
+    }
+
+    public void onRenameBrushButtonClick(View v) {
+
+    }
+
+    public void onDuplicateBrushButtonClick(View v) {
+
+    }
+
+    public void onDeleteBrushButtonClick(View v) {
+
+    }
+
+    private void switchTool(View v) {
+        if (currentTool == null) {
+            currentTool = v;
+            currentTool.setVisibility(View.VISIBLE);
+        } else if (currentTool == v) {
+            currentTool.setVisibility(View.INVISIBLE);
+            currentTool = null;
+        } else {
+            currentTool.setVisibility(View.INVISIBLE);
+            currentTool = v;
+            currentTool.setVisibility(View.VISIBLE);
+        }
     }
 }

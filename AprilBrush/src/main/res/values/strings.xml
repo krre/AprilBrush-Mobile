@@ -13,5 +13,11 @@
     <string name="rotate">Rotate</string>
     <string name="reset">Reset</string>
     <string name="add_to_library">Add to Library</string>
+    <string name="library">Library</string>
+    <string name="edit">Edit</string>
+    <string name="rename">Rename</string>
+    <string name="duplicate">Duplicate</string>
+    <string name="delete">Delete</string>
+    <string name="new_">New</string>
 
 </resources>
