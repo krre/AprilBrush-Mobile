@@ -4,15 +4,17 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import org.krre.aprilbrush.R;
 import org.krre.aprilbrush.logic.BrushEngine;
 
+import java.util.ArrayList;
+
 public class BrushSettingsView extends ScrollView {
     private final String TAG = "AB";
+    private ArrayList<SliderView> sliderViews = new ArrayList<SliderView>();
 
     public BrushSettingsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -32,6 +34,7 @@ public class BrushSettingsView extends ScrollView {
             for (int i = 0; i < brushNames.length; i++) {
                 SliderView sliderView = new SliderView(context, attrs);
                 layout.addView(sliderView);
+                sliderViews.add(sliderView);
                 sliderView.addObserver(BrushEngine.getInstance());
                 sliderView.setId(i);
                 sliderView.setName(brushNames[i]);
@@ -42,8 +45,10 @@ public class BrushSettingsView extends ScrollView {
         }
     }
 
-    @Override
-    public void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    public void reset() {
+        int[] brushValues = getResources().getIntArray(R.array.brush_values);
+        for (int i = 0; i < brushValues.length; i++) {
+            sliderViews.get(i).setValue(brushValues[i]);
+        }
     }
 }

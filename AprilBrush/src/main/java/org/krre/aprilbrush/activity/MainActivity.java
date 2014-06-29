@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
 import org.krre.aprilbrush.R;
 import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.logic.BrushEngine;
+import org.krre.aprilbrush.view.BrushSettingsView;
 import org.krre.aprilbrush.view.PaintView;
 import org.krre.aprilbrush.view.SliderView;
 import org.krre.aprilbrush.view.TransformView;
@@ -121,6 +122,7 @@ public class MainActivity extends Activity {
     }
 
     public void onResetBrushClick(View v) {
-        Log.d(TAG, "reset brush");
+        BrushSettingsView brushSettingsView = (BrushSettingsView)findViewById(R.id.brushSettingsView);
+        brushSettingsView.reset();
     }
 }
