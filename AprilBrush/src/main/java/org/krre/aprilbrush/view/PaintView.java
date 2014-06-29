@@ -16,18 +16,18 @@ public final class PaintView extends View {
     private Bitmap mainBitmap;
     private Paint mainPaint = new Paint();
     private Paint bufferPaint = new Paint();
-    private BrushEngine brushEngine = new BrushEngine(this);
-    public BrushEngine getBrushEngine() {
-        return brushEngine;
-    }
+    private BrushEngine brushEngine = BrushEngine.getInstance();
 
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        bufferPaint.setAlpha(255);
     }
 
     @Override
     public void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+
+        brushEngine.setPaintView(this);
         if (mainBitmap == null) {
             mainBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
             mainBitmap.eraseColor(Color.TRANSPARENT);

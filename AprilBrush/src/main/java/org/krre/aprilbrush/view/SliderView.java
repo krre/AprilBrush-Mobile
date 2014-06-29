@@ -21,11 +21,6 @@ public class SliderView extends RelativeLayout {
     private int id;
     private SliderObservable sliderObservable = new SliderObservable();
 
-    public SliderView(Context context) {
-        super(context);
-        initComponent();
-    }
-
     public SliderView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initComponent();

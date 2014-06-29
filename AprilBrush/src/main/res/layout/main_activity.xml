@@ -137,45 +137,44 @@
         android:background="@drawable/view_background"
         android:visibility="invisible" />
 
-    <ScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="400dp"
         android:layout_height="match_parent"
-        android:id="@+id/brushSettingsScrollView"
         android:layout_below="@+id/topBarLayout"
-        android:background="@drawable/view_background"
-        android:visibility="invisible"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false">
+        android:background="@drawable/view_background"
+        android:id="@+id/brushSettingsLayout">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_to_library"
+                android:id="@+id/addToLibraryButton"
+                android:layout_marginLeft="@dimen/control_margin"
+                android:onClick="onAddToLibraryClick" />
 
-                <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_to_library"
-                    android:id="@+id/addToLibraryButton"
-                    android:layout_marginLeft="@dimen/control_margin"
-                    android:onClick="onAddToLibraryClick" />
-
-                <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/reset"
-                    android:id="@+id/resetBrushButton"
-                    android:layout_marginLeft="@dimen/control_margin"
-                    android:onClick="onResetBrushClick" />
-            </LinearLayout>
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                android:id="@+id/resetBrushButton"
+                android:layout_marginLeft="@dimen/control_margin"
+                android:onClick="onResetBrushClick" />
         </LinearLayout>
-    </ScrollView>
+
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="org.krre.aprilbrush.view.BrushSettingsView"
+            android:id="@+id/brushSettingsView" />
+    </LinearLayout>
 
 </RelativeLayout>

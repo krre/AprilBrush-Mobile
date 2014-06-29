@@ -29,7 +29,7 @@ public final class BrushEngine implements Observer {
     public static final int ANGLE = 6;
     public static final int SCATTER = 7;
 
-    private static BrushEngine brushEngine;
+    private static BrushEngine brushEngine = new BrushEngine();
     private String TAG = "AB";
     private Bitmap dabBitmap;
     private Bitmap bufferBitmap;
@@ -54,13 +54,16 @@ public final class BrushEngine implements Observer {
     private int angle = 0;
     private int scatter = 0;
 
-    public BrushEngine(PaintView paintView) {
+    private BrushEngine() {
         BrushEngine.brushEngine = this;
-        this.paintView = paintView;
         dabPaint.setAntiAlias(true);
         dabBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
         dabCanvas.setBitmap(dabBitmap);
         updateDab();
+    }
+
+    public void setPaintView(PaintView paintView) {
+        this.paintView = paintView;
     }
 
     public static BrushEngine getInstance() {
@@ -205,7 +208,9 @@ public final class BrushEngine implements Observer {
                 updateDab();
                 break;
             case OPACITY:
-                paintView.setOpacity(value);
+                if (paintView != null) {
+                    paintView.setOpacity(value);
+                }
                 break;
             case FLOW:
                 color = Color.argb(value * 255 / 100, Color.red(color), Color.green(color), Color.blue(color));
