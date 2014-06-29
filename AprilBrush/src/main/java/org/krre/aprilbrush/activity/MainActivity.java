@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
     }
 
     public void onAddToLibraryClick(View v) {
-        Log.d(TAG, "add to library");
+        switchTool(brushLibraryTool);
     }
 
     public void onResetBrushClick(View v) {
