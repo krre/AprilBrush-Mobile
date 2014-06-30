@@ -11,7 +11,9 @@ import org.krre.aprilbrush.R;
 public class BrushDbHelper extends SQLiteOpenHelper {
     private static final String TAG = "AB";
     private static final int VERSION = 1;
-    private static final String NAME = "brushes.db";
+    public static final String NAME = "brushes.db";
+    public static final String TABLE = "base";
+
     private Context context;
 
     public BrushDbHelper(Context context) {
@@ -22,8 +24,8 @@ public class BrushDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         ContentValues cv = new ContentValues();
-        cv.put("name", "default");
-        String query = "CREATE TABLE base (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ";
+        cv.put("name", "Default");
+        String query = "CREATE TABLE " + TABLE + " (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ";
         String[] brushNames = context.getResources().getStringArray(R.array.brush_names);
         int[] brushValues = context.getResources().getIntArray(R.array.brush_values);
         for (int i = 0; i < brushValues.length; i++) {
@@ -35,7 +37,7 @@ public class BrushDbHelper extends SQLiteOpenHelper {
         query = query.substring(0, query.length() - 2); // remove ending chars ", "
         query += ");";
         db.execSQL(query);
-        db.insert("base", null, cv);
+        db.insert(TABLE, null, cv);
     }
 
     @Override

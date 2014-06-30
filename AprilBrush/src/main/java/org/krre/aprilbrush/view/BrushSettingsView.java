@@ -51,4 +51,8 @@ public class BrushSettingsView extends ScrollView {
             sliderViews.get(i).setValue(brushValues[i]);
         }
     }
+
+    public ArrayList<SliderView> getSliderViews() {
+        return sliderViews;
+    }
 }

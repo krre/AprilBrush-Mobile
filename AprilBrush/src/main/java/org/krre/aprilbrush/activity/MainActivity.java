@@ -12,6 +12,7 @@ import android.widget.ToggleButton;
 import org.krre.aprilbrush.R;
 import org.krre.aprilbrush.data.GlobalVar;
 import org.krre.aprilbrush.logic.BrushEngine;
+import org.krre.aprilbrush.view.BrushLibraryView;
 import org.krre.aprilbrush.view.BrushSettingsView;
 import org.krre.aprilbrush.view.PaintView;
 import org.krre.aprilbrush.view.TransformView;
@@ -115,7 +116,9 @@ public class MainActivity extends Activity {
 
     // brush library buttons
     public void onNewBrushButtonClick(View v) {
-
+        BrushLibraryView brushLibraryView = (BrushLibraryView)findViewById(R.id.brushLibraryView);
+        BrushSettingsView brushSettingsView = (BrushSettingsView)findViewById(R.id.brushSettingsView);
+        brushLibraryView.add(brushSettingsView.getSliderViews());
     }
 
     public void onEditBrushButtonClick(View v) {
