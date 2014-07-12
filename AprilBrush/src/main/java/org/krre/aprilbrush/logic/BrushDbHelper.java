@@ -25,7 +25,7 @@ public class BrushDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         ContentValues cv = new ContentValues();
         cv.put("name", "Default");
-        String query = "CREATE TABLE " + TABLE + " (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ";
+        String query = "CREATE TABLE " + TABLE + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ";
         String[] brushNames = context.getResources().getStringArray(R.array.brush_names);
         int[] brushValues = context.getResources().getIntArray(R.array.brush_values);
         for (int i = 0; i < brushValues.length; i++) {

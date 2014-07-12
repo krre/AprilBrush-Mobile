@@ -1,5 +1,6 @@
 package org.krre.aprilbrush.view;
 
+import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,8 +35,9 @@ public class BrushLibraryView extends ListView implements LoaderManager.LoaderCa
         int[] to = new int[] { R.id.brushlibTextView };
         adapter = new SimpleCursorAdapter(context, R.layout.brushlib_item, null, from, to, 0);
         setAdapter(adapter);
-//        getSupportLoaderManager().initLoader(0, null, this);
 
+        Activity hostActivity = (Activity)context;
+        hostActivity.getLoaderManager().initLoader(0, null, this);
     }
 
     public void add(ArrayList<SliderView> sliderViews) {

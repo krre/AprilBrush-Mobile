@@ -188,7 +188,7 @@
         android:layout_alignParentRight="true"
         android:id="@+id/brushLibraryTool"
         android:background="@drawable/view_background"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <LinearLayout
             android:orientation="horizontal"
