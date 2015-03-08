@@ -1,39 +1,40 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
 buildscript {
-    ext.kotlin_version = '0.7.+'
+    ext.kotlin_version = "0.10.770"
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath "com.android.tools.build:gradle:1.1.3"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-apply plugin: 'android'
-apply plugin: 'kotlin-android'
-
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 19
-        versionCode 010
+        applicationId "com.example.krre.aprilbrush"
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 10
         versionName "0.1.0"
     }
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += "src/main/kotlin"
     }
 }
 
@@ -41,3 +42,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
+
+
+
