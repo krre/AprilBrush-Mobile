@@ -21,7 +21,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.krre.aprilbrush"
+        applicationId "org.aprilbrush"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 10

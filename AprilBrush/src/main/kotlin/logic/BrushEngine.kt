@@ -1,11 +1,11 @@
-package org.krre.aprilbrush.logic
+package org.aprilbrush.logic
 
 import android.view.MotionEvent
 import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.Canvas
 import android.graphics.Color
-import org.krre.aprilbrush.view.PaintView
+import org.aprilbrush.view.PaintView
 import android.graphics.Path
 import android.graphics.PathMeasure
 import android.content.res.Configuration
@@ -46,18 +46,18 @@ class BrushEngine(paintView : PaintView) {
         if ((orientation == Configuration.ORIENTATION_LANDSCAPE && width < height) ||
             (orientation == Configuration.ORIENTATION_PORTRAIT && width > height)) {
             val matrix = Matrix()
-            matrix.postRotate(90f);
-            bufferBitmap = Bitmap.createBitmap(value, 0, 0, width, height, matrix, true);
+            matrix.postRotate(90f)
+            bufferBitmap = Bitmap.createBitmap(value, 0, 0, width, height, matrix, true)
         } else {
             bufferBitmap = Bitmap.createBitmap(value, 0, 0, width, height)
         }
-        bufferCanvas.setBitmap(bufferBitmap!!);
+        bufferCanvas.setBitmap(bufferBitmap!!)
         paintView.invalidate()
     }
 
     fun setBufferSize(width : Int, height : Int) {
         bufferBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        bufferCanvas.setBitmap(bufferBitmap!!);
+        bufferCanvas.setBitmap(bufferBitmap!!)
     }
 
     fun paintDab(event : MotionEvent) {
