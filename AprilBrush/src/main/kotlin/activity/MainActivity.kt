@@ -22,8 +22,8 @@ public class MainActivity() : Activity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        val paintView: PaintView? = findViewById(R.id.paintView) as PaintView
-        val bufferBitmap = paintView?.brushEngine?.bufferBitmap
+        val paintView = findViewById(R.id.paintView) as PaintView
+        val bufferBitmap = paintView.brushEngine.bufferBitmap
         outState.putParcelable("bufferBitmap", bufferBitmap)
     }
 
