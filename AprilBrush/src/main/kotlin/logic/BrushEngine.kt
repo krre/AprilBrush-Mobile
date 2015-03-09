@@ -91,7 +91,7 @@ class BrushEngine(paintView : PaintView) {
         }
     }
 
-    private fun interpolateDab(x : Float, y : Float, p : Float) {
+    private fun interpolateDab(x : Float, y : Float, pressure: Float) {
         val pointSpace = Math.sqrt(Math.pow(prevX.toDouble() - x, 2.toDouble())
         + Math.pow(prevY.toDouble() - y, 2.toDouble()))
 
@@ -107,19 +107,18 @@ class BrushEngine(paintView : PaintView) {
         while (pathMeasure.getLength() >= pathLength) {
             pathMeasure.getPosTan(pathLength, pathMeasurePos, pathMeasureTan)
             if (pathLength > 0) {
-                paintOneDab(pathMeasurePos[0], pathMeasurePos[1], p) // TODO: interpolate pressure
+                paintOneDab(pathMeasurePos[0], pathMeasurePos[1], pressure) // TODO: interpolate pressure
             }
             pathLength += deltaDab
         }
         prevX = x
         prevY = y
-        prevPressure = p
+        prevPressure = pressure
     }
 
-    private fun paintOneDab(x : Float, y : Float, p : Float) {
-        val pressure = if (toolType == MotionEvent.TOOL_TYPE_STYLUS) p else 1.0f
+    private fun paintOneDab(x : Float, y : Float, pressure: Float) {
         bufferCanvas.save()
-        val alpha : Int = Math.round((pressure * 255f))
+        val alpha : Int = Math.round((if (toolType == MotionEvent.TOOL_TYPE_STYLUS) pressure else 1.0f) * 255f)
         bufferPaint.setAlpha(alpha)
         val paintX = x - diameter / 2f
         val paintY = y - diameter / 2f
