@@ -11,12 +11,12 @@ import android.graphics.PathMeasure
 import android.content.res.Configuration
 import android.util.Log
 import android.graphics.Matrix
+import kotlin.properties.Delegates
 
 class BrushEngine(paintView : PaintView) {
     private val TAG = "AB"
-    private var dabBitmap : Bitmap? = null
-    var bufferBitmap : Bitmap? = null
-        private set
+    private var dabBitmap : Bitmap by Delegates.notNull()
+    var bufferBitmap : Bitmap by Delegates.notNull()
     private val paintView = paintView
     private val bufferPaint = Paint()
     private val dabPaint = Paint()
@@ -35,8 +35,8 @@ class BrushEngine(paintView : PaintView) {
     {
         dabPaint.setAntiAlias(true)
         dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888)
-        dabBitmap?.eraseColor(Color.TRANSPARENT)
-        dabCanvas.setBitmap(dabBitmap!!)
+        dabBitmap.eraseColor(Color.TRANSPARENT)
+        dabCanvas.setBitmap(dabBitmap)
         dabCanvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, dabPaint)
     }
 
@@ -51,13 +51,13 @@ class BrushEngine(paintView : PaintView) {
         } else {
             bufferBitmap = Bitmap.createBitmap(value, 0, 0, width, height)
         }
-        bufferCanvas.setBitmap(bufferBitmap!!)
+        bufferCanvas.setBitmap(bufferBitmap)
         paintView.invalidate()
     }
 
     fun setBufferSize(width : Int, height : Int) {
         bufferBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        bufferCanvas.setBitmap(bufferBitmap!!)
+        bufferCanvas.setBitmap(bufferBitmap)
     }
 
     fun paintDab(event : MotionEvent) {
@@ -123,7 +123,7 @@ class BrushEngine(paintView : PaintView) {
         bufferPaint.setAlpha(alpha)
         val paintX = x - diameter / 2f
         val paintY = y - diameter / 2f
-        bufferCanvas.drawBitmap(dabBitmap!!, paintX, paintY, bufferPaint)
+        bufferCanvas.drawBitmap(dabBitmap, paintX, paintY, bufferPaint)
         bufferCanvas.restore()
         paintView.invalidate(paintX.toInt() - 1, paintY.toInt() - 1, paintX.toInt() + diameter + 1, paintY.toInt() + diameter + 1)
     }

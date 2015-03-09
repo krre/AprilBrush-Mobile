@@ -16,14 +16,12 @@ class PaintView(context : Context, attrs : AttributeSet) : View(context, attrs) 
 
     override fun onSizeChanged(w : Int, h : Int, oldw : Int, oldh : Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        if (brushEngine.bufferBitmap == null) {
-            brushEngine.setBufferSize(w, h)
-        }
+        brushEngine.setBufferSize(w, h)
     }
 
     override fun onDraw(canvas : Canvas ) {
         canvas.drawColor(Color.WHITE)
-        canvas.drawBitmap(brushEngine.bufferBitmap!!, 0f, 0f, bufferPaint)
+        canvas.drawBitmap(brushEngine.bufferBitmap, 0f, 0f, bufferPaint)
     }
 
     override fun onTouchEvent(event : MotionEvent ) : Boolean {
