@@ -2,15 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.3'
-    }
-}
-
-buildscript {
     ext.kotlin_version = "0.10.770"
     repositories {
         jcenter()
