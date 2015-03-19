@@ -32,7 +32,7 @@ class BrushEngine(paintView : PaintView) {
 
     private var diameter = 50
     private var spacing = 100
-    {
+    init {
         dabPaint.setAntiAlias(true)
         dabBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888)
         dabBitmap.eraseColor(Color.TRANSPARENT)
