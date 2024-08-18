@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="brush_names">
+        <item>"Size"</item>
+        <item>"Opacity"</item>
+        <item>"Flow"</item>
+        <item>"Spacing"</item>
+        <item>"Hardness"</item>
+        <item>"Roundness"</item>
+        <item>"Angle"</item>
+        <item>"Scatter"</item>
+    </string-array>
+    <integer-array
+        name="brush_mins">
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+    <integer-array
+        name="brush_maxes">
+        <item>300</item>
+        <item>100</item>
+        <item>100</item>
+        <item>100</item>
+        <item>100</item>
+        <item>100</item>
+        <item>360</item>
+        <item>500</item>
+    </integer-array>
+    <integer-array
+        name="brush_values">
+        <item>40</item>
+        <item>60</item>
+        <item>80</item>
+        <item>20</item>
+        <item>80</item>
+        <item>100</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+</resources>

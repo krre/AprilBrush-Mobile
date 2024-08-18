@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AprilBrush</string>
+    <string name="color">Color</string>
+    <string name="brush">Brush</string>
+    <string name="clear">Clear</string>
+    <string name="pen">Pen</string>
+    <string name="finger">Finger</string>
+    <string name="paint">Paint</string>
+    <string name="pan">Pan</string>
+    <string name="zoom">Zoom</string>
+    <string name="rotate">Rotate</string>
+    <string name="reset">Reset</string>
+    <string name="add_to_library">Add to Library</string>
+    <string name="library">Library</string>
+    <string name="edit">Edit</string>
+    <string name="rename">Rename</string>
+    <string name="duplicate">Duplicate</string>
+    <string name="delete">Delete</string>
+    <string name="new_">New</string>
+
+</resources>
